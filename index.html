@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobSouqKSA — Professional Job Network</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#0f4c81;--pd:#0a3660;--pl:#e8f1fb;--acc:#c47f17;--bg:#f0f4f8;--card:#fff;--text:#111827;--muted:#6b7280;--border:rgba(0,0,0,0.08);--green:#15803d;--red:#b91c1c;--r6:6px;--r10:10px;--r16:16px}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:var(--text);background:var(--bg);min-height:100vh}
+
+/* ── NAVBAR ── */
+.nav{background:var(--p);height:54px;display:flex;align-items:center;padding:0 24px;gap:14px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.08)}
+.logo{display:flex;align-items:baseline;gap:0;cursor:pointer;text-decoration:none}
+.logo-j{font-size:22px;font-weight:900;color:#fff;letter-spacing:-1px;font-style:italic}
+.logo-ob{font-size:22px;font-weight:900;color:rgba(255,255,255,0.5);letter-spacing:-1px;font-style:italic}
+.logo-souq{font-size:22px;font-weight:900;color:#fbbf24;letter-spacing:-1px;font-style:italic}
+.logo-ksa{font-size:10px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:3px;margin-left:3px;align-self:center}
+.nsearch{flex:1;max-width:320px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:var(--r6);display:flex;align-items:center;padding:0 11px;gap:7px;height:34px}
+.nsearch input{background:none;border:none;outline:none;color:#fff;font-size:13px;width:100%}
+.nsearch input::placeholder{color:rgba(255,255,255,0.45)}
+.nsearch svg{width:14px;height:14px;fill:none;stroke:rgba(255,255,255,0.55);stroke-width:2;stroke-linecap:round;flex:none}
+.nright{margin-left:auto;display:flex;align-items:center;gap:1px}
+.nb{background:none;border:none;color:rgba(255,255,255,0.7);padding:6px 10px;border-radius:var(--r6);cursor:pointer;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:background .15s;position:relative}
+.nb:hover,.nb.on{background:rgba(255,255,255,0.12);color:#fff}
+.nb svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ndot{width:6px;height:6px;background:#fbbf24;border-radius:50%;position:absolute;top:4px;right:8px}
+.nava{width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:8px;border:1.5px solid rgba(255,255,255,0.25)}
+.ham{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.ham svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.mobm{display:none;background:var(--p);flex-direction:column;border-bottom:1px solid rgba(255,255,255,0.1);position:sticky;top:54px;z-index:99}
+.mobm.open{display:flex}
+.mmi{color:rgba(255,255,255,0.85);padding:11px 20px;font-size:13px;border-bottom:0.5px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;align-items:center;gap:10px}
+.mmi svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+
+/* ── LAYOUT ── */
+.wrap{display:flex;max-width:1080px;margin:0 auto;gap:14px;padding:14px}
+.sl{width:196px;flex:none;display:flex;flex-direction:column;gap:10px}
+.feed{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.sr{width:196px;flex:none;display:flex;flex-direction:column;gap:10px}
+.page{display:none}
+.page.on{display:block}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--r10);border:0.5px solid var(--border)}
+.pad{padding:14px}
+.pad-sm{padding:10px 12px}
+
+/* ── PROFILE SIDEBAR ── */
+.pbanner{height:44px;background:var(--p);border-radius:var(--r10) var(--r10) 0 0}
+.pava-wrap{position:relative;padding:0 14px}
+.pava{width:46px;height:46px;border-radius:50%;background:var(--acc);border:3px solid var(--card);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;position:absolute;top:-23px}
+.pinfo{padding:28px 14px 12px}
+.pinfo h3{font-size:13px;font-weight:600}
+.pinfo p{font-size:11px;color:var(--muted);margin-top:2px}
+.pstats{border-top:0.5px solid var(--border);margin-top:10px;padding-top:10px;display:flex;justify-content:space-around;text-align:center}
+.pstats strong{display:block;font-size:14px;color:var(--p);font-weight:600}
+.pstats span{font-size:10px;color:var(--muted)}
+
+/* ── SIDENAV ── */
+.sni{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r6);cursor:pointer;font-size:12px;color:var(--muted);transition:all .15s}
+.sni:hover{background:var(--bg);color:var(--text)}
+.sni.on{background:var(--pl);color:var(--p);font-weight:500}
+.sni svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ── COMPOSER ── */
+.crow{display:flex;gap:10px;align-items:center}
+.cava{width:34px;height:34px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.cinp{flex:1;background:var(--bg);border:0.5px solid var(--border);border-radius:20px;padding:8px 14px;font-size:13px;color:var(--muted);cursor:text}
+.cacts{display:flex;gap:5px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);align-items:center;flex-wrap:wrap}
+.cbt{background:none;border:0.5px solid var(--border);border-radius:20px;padding:5px 11px;font-size:11px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:4px;transition:all .15s}
+.cbt svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;flex:none}
+.cbt:hover{border-color:var(--p);color:var(--p)}
+.pbtn{margin-left:auto;background:var(--p);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:12px;cursor:pointer;font-weight:500;transition:opacity .15s}
+.pbtn:hover{opacity:.85}
+
+/* ── FILTER TABS ── */
+.ftabs{display:flex;gap:3px;background:var(--card);border-radius:var(--r10);border:0.5px solid var(--border);padding:4px}
+.ft{flex:1;text-align:center;padding:6px 4px;border-radius:var(--r6);font-size:11px;cursor:pointer;color:var(--muted);transition:all .15s;white-space:nowrap}
+.ft.on{background:var(--p);color:#fff;font-weight:500}
+.ft:hover:not(.on){background:var(--bg)}
+
+/* ── POST ── */
+.ph{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.pa{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex:none}
+.pm h4{font-size:13px;font-weight:600}
+.pm p{font-size:11px;color:var(--muted)}
+.pt{font-size:10px;color:var(--muted);margin-top:1px}
+.pbadge{margin-left:auto;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;white-space:nowrap;background:var(--pl);color:#0c447c}
+.pbadge.hire{background:#f0fdf4;color:#166534}
+.pbadge.tip{background:#fef9ee;color:#854f0b}
+.ptxt{font-size:13px;line-height:1.65;margin-bottom:10px;color:var(--text)}
+.jbox{background:var(--bg);border-radius:var(--r6);padding:10px 12px;margin-bottom:10px;border:0.5px solid var(--border)}
+.jbox h5{font-size:13px;font-weight:600;color:var(--p)}
+.jmeta{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.jtag{background:var(--card);border:0.5px solid var(--border);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)}
+.stag{background:#f0fdf4;color:#166534;border-color:#bbf7d0}
+.abtn{background:var(--p);color:#fff;border:none;border-radius:var(--r6);padding:8px;font-size:12px;font-weight:500;cursor:pointer;width:100%;margin-top:8px;transition:opacity .15s}
+.abtn:hover{opacity:.85}
+.pacts{display:flex;border-top:0.5px solid var(--border);padding-top:8px;gap:2px;margin-top:2px}
+.acbt{flex:1;background:none;border:none;padding:6px 4px;border-radius:var(--r6);font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .15s}
+.acbt svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.acbt:hover{background:var(--bg);color:var(--p)}
+.acbt.liked{color:var(--red)}
+
+/* ── RIGHT WIDGETS ── */
+.wh{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px}
+.ci{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--border)}
+.ci:last-of-type{border-bottom:none}
+.clogo{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;flex:none}
+.cinfo h5{font-size:11px;font-weight:600}
+.cinfo p{font-size:10px;color:var(--muted)}
+.fbt{margin-left:auto;background:none;border:0.5px solid var(--p);color:var(--p);border-radius:20px;padding:3px 8px;font-size:10px;cursor:pointer;flex:none;transition:all .15s}
+.fbt:hover,.fbt.fw{background:var(--p);color:#fff;border-color:var(--p)}
+.jal{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--border)}
+.jal:last-of-type{border-bottom:none}
+.jai{width:26px;height:26px;border-radius:6px;background:var(--pl);display:flex;align-items:center;justify-content:center;flex:none}
+.jai svg{width:13px;height:13px;fill:none;stroke:#185fa5;stroke-width:1.8;stroke-linecap:round}
+.adot{width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:auto;flex:none}
+.statg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.si{background:var(--bg);border-radius:var(--r6);padding:8px;text-align:center}
+.si strong{display:block;font-size:15px;font-weight:600;color:var(--p)}
+.si span{font-size:9px;color:var(--muted)}
+.si.a strong{color:var(--acc)}
+.si.g strong{color:var(--green)}
+.tag{display:inline-block;background:var(--pl);color:#0c447c;font-size:11px;padding:3px 8px;border-radius:20px;margin:2px 2px 2px 0;cursor:pointer;transition:background .15s}
+.tag:hover{background:var(--p);color:#fff}
+
+/* ── COMPANY DASHBOARD ── */
+.dash-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.dstat{background:var(--card);border-radius:var(--r10);border:0.5px solid var(--border);padding:14px}
+.dstat p{font-size:11px;color:var(--muted);margin-bottom:4px}
+.dstat strong{font-size:22px;font-weight:700;color:var(--p)}
+.dstat em{font-size:11px;color:var(--green);margin-left:4px;font-style:normal}
+.dstat em.d{color:var(--red)}
+.sec-title{font-size:13px;font-weight:600;margin-bottom:10px}
+.jtable{width:100%;border-collapse:collapse}
+.jtable th{font-size:11px;font-weight:500;color:var(--muted);text-align:left;padding:6px 10px;border-bottom:0.5px solid var(--border);background:var(--bg)}
+.jtable td{font-size:12px;padding:8px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+.jtable tr:last-child td{border-bottom:none}
+.jtable tr:hover td{background:var(--bg)}
+.jstatus{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}
+.js-a{background:#f0fdf4;color:#166534}
+.js-p{background:var(--pl);color:#0c447c}
+.js-c{background:#fef9ee;color:#854f0b}
+.act-btn{background:none;border:0.5px solid var(--border);border-radius:var(--r6);padding:4px 10px;font-size:11px;cursor:pointer;color:var(--muted);transition:all .15s}
+.act-btn:hover{border-color:var(--p);color:var(--p)}
+.applist{display:flex;flex-direction:column;gap:8px}
+.appitem{background:var(--bg);border-radius:var(--r6);padding:10px 12px;display:flex;align-items:center;gap:10px;border:0.5px solid var(--border)}
+.appava{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;color:#fff;flex:none}
+.appinfo h5{font-size:12px;font-weight:600}
+.appinfo p{font-size:11px;color:var(--muted)}
+.app-acts{margin-left:auto;display:flex;gap:6px}
+.abt{border:none;border-radius:var(--r6);padding:5px 10px;font-size:11px;cursor:pointer;font-weight:500}
+.abt-y{background:var(--green);color:#fff}
+.abt-n{background:#fee2e2;color:var(--red)}
+
+/* ── PROFILE PAGE ── */
+.prof-banner{height:80px;background:var(--p);border-radius:var(--r10) var(--r10) 0 0}
+.prof-ava-row{display:flex;align-items:flex-end;gap:12px;padding:0 20px;margin-top:-30px;margin-bottom:12px}
+.prof-ava{width:60px;height:60px;border-radius:50%;border:3px solid var(--card);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#fff;flex:none}
+.prof-actions{margin-left:auto;display:flex;gap:6px}
+.prof-body{padding:0 20px 16px}
+.prof-body h2{font-size:17px;font-weight:700}
+.prof-body .sub{font-size:13px;color:var(--muted);margin-top:2px}
+.prof-body .loc{font-size:12px;color:var(--muted);margin-top:4px}
+.prof-stats{display:flex;gap:18px;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--border)}
+.ps{text-align:center}
+.ps strong{display:block;font-size:16px;font-weight:700;color:var(--p)}
+.ps span{font-size:10px;color:var(--muted)}
+.sec{margin-top:12px;padding-top:12px;border-top:0.5px solid var(--border)}
+.sec h4{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.skill-pill{display:inline-block;background:var(--pl);color:#0c447c;font-size:11px;padding:3px 10px;border-radius:20px;margin:2px 3px 2px 0}
+.exp-item{margin-bottom:8px}
+.exp-item h5{font-size:13px;font-weight:600}
+.exp-item p{font-size:12px;color:var(--muted)}
+.conn-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.conn-card{background:var(--bg);border-radius:var(--r6);padding:8px;display:flex;align-items:center;gap:7px;border:0.5px solid var(--border)}
+.conn-ava{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:10px;color:#fff;flex:none}
+.conn-card h6{font-size:11px;font-weight:600}
+.conn-card p{font-size:10px;color:var(--muted)}
+
+/* ── LOGIN PAGE ── */
+.login-wrap{min-height:calc(100vh - 54px);display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
+.login-box{background:var(--card);border-radius:var(--r16);border:0.5px solid var(--border);padding:32px 28px;width:100%;max-width:360px;text-align:center}
+.login-logo{font-size:28px;font-weight:900;margin-bottom:6px;letter-spacing:-1px;font-style:italic}
+.login-logo .j{color:var(--p)}.login-logo .ob{color:var(--muted)}.login-logo .s{color:var(--acc)}.login-logo .k{color:var(--muted);font-size:13px;letter-spacing:2px;font-style:normal;font-weight:500;margin-left:2px}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+.rtabs{display:flex;background:var(--bg);border-radius:var(--r6);padding:3px;margin-bottom:20px}
+.rtab{flex:1;text-align:center;padding:7px;border-radius:var(--r6);font-size:12px;cursor:pointer;color:var(--muted);transition:all .15s;font-weight:500}
+.rtab.on{background:var(--card);color:var(--p);border:0.5px solid var(--border)}
+.inp{width:100%;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r6);padding:9px 12px;font-size:13px;color:var(--text);margin-bottom:8px;outline:none;transition:border .15s;font-family:inherit}
+.inp:focus{border-color:var(--p)}
+.lbtn{width:100%;background:var(--p);color:#fff;border:none;border-radius:var(--r6);padding:10px;font-size:13px;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .15s;font-family:inherit}
+.lbtn:hover{opacity:.85}
+.ldiv{display:flex;align-items:center;gap:8px;margin:14px 0;color:var(--muted);font-size:12px}
+.ldiv::before,.ldiv::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.lsoc{width:100%;background:none;border:0.5px solid var(--border);border-radius:var(--r6);padding:9px;font-size:12px;cursor:pointer;color:var(--muted);transition:all .15s;margin-bottom:6px;font-family:inherit}
+.lsoc:hover{border-color:var(--p);color:var(--p)}
+.llink{font-size:12px;color:var(--muted);margin-top:14px}
+.llink a{color:var(--p);cursor:pointer;text-decoration:none}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.role-opt{border:0.5px solid var(--border);border-radius:var(--r6);padding:10px;text-align:center;cursor:pointer;transition:all .15s;font-size:12px;color:var(--muted)}
+.role-opt:hover{border-color:var(--p);color:var(--p)}
+.role-opt.on{background:var(--pl);border-color:var(--p);color:var(--p);font-weight:500}
+.role-opt svg{width:18px;height:18px;display:block;margin:0 auto 5px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+
+/* ── LANG TOGGLE ── */
+.lang-bar{background:var(--card);border-bottom:0.5px solid var(--border);padding:6px 24px;display:flex;align-items:center;gap:10px}
+.lang-bar span{font-size:12px;color:var(--muted)}
+.ls{display:inline-flex;align-items:center;background:var(--bg);border:0.5px solid var(--border);border-radius:20px;padding:3px}
+.lopt{padding:3px 12px;border-radius:16px;font-size:11px;cursor:pointer;color:var(--muted);font-weight:500;transition:all .15s}
+.lopt.on{background:var(--p);color:#fff}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:14px;right:14px;background:#111827;color:#fff;padding:9px 14px;border-radius:var(--r6);font-size:12px;transform:translateY(50px);opacity:0;transition:all .3s;z-index:999;max-width:220px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){.sl{display:none}.sr{width:176px}}
+@media(max-width:620px){.sr{display:none}.wrap{padding:8px;gap:8px}.nsearch{display:none}.nright{display:none}.ham{display:block}.lang-bar{padding:6px 14px}}
+@media(max-width:380px){.wrap{padding:6px;gap:6px}.pad{padding:12px}}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <a class="logo" href="#" onclick="showPage('feed');return false">
+    <span class="logo-j">J</span><span class="logo-ob">ob</span><span class="logo-souq">Souq</span><span class="logo-ksa">KSA</span>
+  </a>
+  <div class="nsearch">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search jobs, companies, skills...">
+  </div>
+  <div class="nright">
+    <button class="nb on" onclick="showPage('feed');navOn(this)">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home
+    </button>
+    <button class="nb" onclick="showPage('dashboard');navOn(this)">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Dashboard
+    </button>
+    <button class="nb" onclick="showPage('profile');navOn(this)">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile<div class="ndot"></div>
+    </button>
+    <button class="nb" onclick="showToast('3 new messages!')">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<div class="ndot"></div>
+    </button>
+    <button class="nb" onclick="showPage('login');navOn(this)">
+      <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Sign In
+    </button>
+    <div class="nava">AM</div>
+  </div>
+  <button class="ham" onclick="document.getElementById('mob').classList.toggle('open')">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobm" id="mob">
+  <div class="mmi" onclick="showPage('feed');document.getElementById('mob').classList.remove('open')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home Feed</div>
+  <div class="mmi" onclick="showPage('dashboard');document.getElementById('mob').classList.remove('open')"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>Company Dashboard</div>
+  <div class="mmi" onclick="showPage('profile');document.getElementById('mob').classList.remove('open')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>My Profile</div>
+  <div class="mmi" onclick="showPage('login');document.getElementById('mob').classList.remove('open')"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/></svg>Sign In / Register</div>
+</div>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span>Language / اللغة:</span>
+  <div class="ls">
+    <div class="lopt on" onclick="setLang('en',this)">English</div>
+    <div class="lopt" onclick="setLang('ar',this)">العربية</div>
+  </div>
+</div>
+
+<!-- ═══════════ HOME FEED PAGE ═══════════ -->
+<div id="p-feed" class="page on">
+  <div class="wrap">
+    <div class="sl">
+      <div class="card">
+        <div class="pbanner"></div>
+        <div class="pava-wrap"><div class="pava">AM</div></div>
+        <div class="pinfo">
+          <h3 id="w-uname">Ahmed Malik</h3>
+          <p id="w-urole">Software Engineer · Riyadh</p>
+          <div class="pstats">
+            <div><strong>142</strong><span id="w-conn">Connections</span></div>
+            <div><strong>38</strong><span id="w-app">Applied</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card pad-sm">
+        <div class="sni on"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span id="w-home">Home Feed</span></div>
+        <div class="sni" onclick="showPage('dashboard')"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span id="w-dash">Dashboard</span></div>
+        <div class="sni" onclick="showPage('profile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="w-prof">My Profile</span></div>
+        <div class="sni" onclick="showToast('Saved jobs...')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span id="w-saved">Saved Jobs</span></div>
+        <div class="sni" onclick="showToast('Applications...')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span id="w-apps">Applications</span></div>
+        <div class="sni" onclick="showPage('login')"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/></svg><span id="w-signin">Sign In</span></div>
+      </div>
+      <div class="card pad">
+        <div class="wh" id="w-trending">Trending Skills</div>
+        <span class="tag">#ReactJS</span><span class="tag">#Python</span><span class="tag">#DataScience</span><span class="tag">#AWS</span><span class="tag">#MERN</span><span class="tag">#UXDesign</span>
+      </div>
+    </div>
+
+    <div class="feed">
+      <div class="card pad">
+        <div class="crow">
+          <div class="cava">AM</div>
+          <div class="cinp" id="w-compose">Share your experience or post a job...</div>
+        </div>
+        <div class="cacts">
+          <button class="cbt"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg><span id="w-photo">Photo</span></button>
+          <button class="cbt"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span id="w-jobpost">Job Post</span></button>
+          <button class="cbt"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span id="w-resume">Resume</span></button>
+          <button class="pbtn" onclick="showToast('Post shared!')" id="w-postbtn">Post</button>
+        </div>
+      </div>
+      <div class="ftabs">
+        <div class="ft on" onclick="ft(this)" id="w-all">All Posts</div>
+        <div class="ft" onclick="ft(this)" id="w-jobs">Job Posts</div>
+        <div class="ft" onclick="ft(this)" id="w-hiring">Hiring</div>
+        <div class="ft" onclick="ft(this)" id="w-tips">Career Tips</div>
+      </div>
+
+      <!-- POST 1 -->
+      <div class="card pad">
+        <div class="ph">
+          <div class="pa" style="background:#0f4c81">SA</div>
+          <div class="pm"><h4 id="w-p1name">Saudi Aramco <span style="font-weight:400;color:var(--muted)">· Verified</span></h4><p id="w-p1sub">Oil & Energy · Dhahran</p><span class="pt" id="w-p1time">2 hours ago</span></div>
+          <div class="pbadge" id="w-p1badge">Company</div>
+        </div>
+        <div class="jbox">
+          <h5 id="w-p1job">Senior Software Engineer — Digital Solutions</h5>
+          <div class="jmeta">
+            <span class="jtag" id="w-p1loc">Dhahran, KSA</span><span class="jtag" id="w-p1type">Full Time</span><span class="jtag" id="w-p1exp">5+ Years</span><span class="jtag stag">SAR 25,000 – 35,000</span>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.55" id="w-p1desc">React, Node.js and cloud experience required. Strong problem-solving skills essential.</p>
+          <button class="abtn" onclick="showToast('Application submitted! Company will contact you soon.')" id="w-p1apply">Apply Now</button>
+        </div>
+        <div class="pacts">
+          <button class="acbt" onclick="lk(this)"><svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="lc">247</span></button>
+          <button class="acbt"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>43</button>
+          <button class="acbt" onclick="showToast('Job saved!')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span id="w-save">Save</span></button>
+          <button class="acbt" onclick="showToast('Shared!')"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="w-share">Share</span></button>
+        </div>
+      </div>
+
+      <!-- POST 2 -->
+      <div class="card pad">
+        <div class="ph">
+          <div class="pa" style="background:#c47f17">FH</div>
+          <div class="pm"><h4>Fatima Hassan</h4><p id="w-p2sub">HR Manager · Riyadh</p><span class="pt" id="w-p2time">5 hours ago</span></div>
+          <div class="pbadge hire" id="w-p2badge">Hiring</div>
+        </div>
+        <p class="ptxt" id="w-p2txt">Urgent! We need candidates for 3 positions:<br><br>
+        &bull; Digital Marketing Manager<br>
+        &bull; Content Writer (Arabic / English)<br>
+        &bull; Sales Executive<br><br>
+        Interested candidates DM below. Deadline tomorrow.</p>
+        <div class="pacts">
+          <button class="acbt" onclick="lk(this)"><svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="lc">89</span></button>
+          <button class="acbt"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>31</button>
+          <button class="acbt" onclick="showToast('Saved!')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span id="w-save2">Save</span></button>
+          <button class="acbt" onclick="showToast('Message sent to Fatima!')"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span id="w-connect">Connect</span></button>
+        </div>
+      </div>
+
+      <!-- POST 3 -->
+      <div class="card pad">
+        <div class="ph">
+          <div class="pa" style="background:#15803d">KA</div>
+          <div class="pm"><h4>Khalid Al-Rashidi <span style="font-weight:400;color:var(--acc);font-size:11px">Top Voice</span></h4><p id="w-p3sub">Career Coach · Riyadh</p><span class="pt" id="w-p3time">1 day ago</span></div>
+          <div class="pbadge tip" id="w-p3badge">Career Tip</div>
+        </div>
+        <p class="ptxt" id="w-p3txt">Interview tip: Read the company's recent news before your interview. When asked "What do you know about us?" — don't just mention the website, mention their latest project or achievement. This 5-minute preparation separates you from 80% of candidates.</p>
+        <div class="pacts">
+          <button class="acbt" onclick="lk(this)"><svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg><span class="lc">412</span></button>
+          <button class="acbt"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>76</button>
+          <button class="acbt" onclick="showToast('Saved!')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span id="w-save3">Save</span></button>
+          <button class="acbt" onclick="showToast('Shared!')"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span id="w-share3">Share</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sr">
+      <div class="card pad">
+        <div class="wh" id="w-topco">Top Companies</div>
+        <div class="ci"><div class="clogo" style="background:#0f4c81">SA</div><div class="cinfo"><h5>Saudi Aramco</h5><p>12 <span id="w-jobs2">jobs</span></p></div><button class="fbt fw" onclick="fw(this)" id="w-follow">Following</button></div>
+        <div class="ci"><div class="clogo" style="background:#b91c1c">ST</div><div class="cinfo"><h5>STC Group</h5><p>8 <span id="w-jobs3">jobs</span></p></div><button class="fbt" onclick="fw(this)" id="w-follow2">Follow</button></div>
+        <div class="ci"><div class="clogo" style="background:#c47f17">MW</div><div class="cinfo"><h5>Mawdoo3</h5><p>5 <span id="w-jobs4">jobs</span></p></div><button class="fbt" onclick="fw(this)" id="w-follow3">Follow</button></div>
+        <div class="ci"><div class="clogo" style="background:#15803d">SB</div><div class="cinfo"><h5>Sabic</h5><p>15 <span id="w-jobs5">jobs</span></p></div><button class="fbt" onclick="fw(this)" id="w-follow4">Follow</button></div>
+      </div>
+      <div class="card pad">
+        <div class="wh" id="w-alerts">Job Alerts</div>
+        <div class="jal"><div class="jai"><svg viewBox="0 0 24 24"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg></div><div><div style="font-size:11px;font-weight:600" id="w-a1">React Developer</div><div style="font-size:10px;color:var(--muted)">Riyadh · SAR 18k</div></div><div class="adot"></div></div>
+        <div class="jal"><div class="jai"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div style="font-size:11px;font-weight:600" id="w-a2">Data Analyst</div><div style="font-size:10px;color:var(--muted)">Jeddah · SAR 12k</div></div><div class="adot"></div></div>
+        <div class="jal"><div class="jai"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div><div><div style="font-size:11px;font-weight:600" id="w-a3">UX Designer</div><div style="font-size:10px;color:var(--muted)">Remote · SAR 15k</div></div><div class="adot"></div></div>
+      </div>
+      <div class="card pad">
+        <div class="wh" id="w-platform">Platform</div>
+        <div class="statg">
+          <div class="si"><strong>48K+</strong><span id="w-s1">Job Seekers</span></div>
+          <div class="si"><strong>1.2K</strong><span id="w-s2">Companies</span></div>
+          <div class="si a"><strong>3.8K</strong><span id="w-s3">Active Jobs</span></div>
+          <div class="si g"><strong>892</strong><span id="w-s4">Hired Today</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DASHBOARD PAGE ═══════════ -->
+<div id="p-dashboard" class="page">
+  <div style="max-width:1080px;margin:0 auto;padding:14px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+      <div style="width:42px;height:42px;border-radius:10px;background:#0f4c81;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px">SA</div>
+      <div><h2 style="font-size:16px;font-weight:700" id="w-dname">Saudi Aramco</h2><p style="font-size:12px;color:var(--muted)" id="w-dadmin">Company Dashboard · Admin View</p></div>
+      <button class="pbtn" style="margin-left:auto" onclick="showToast('New job post created!')" id="w-newjob">+ New Job Post</button>
+    </div>
+    <div class="dash-top">
+      <div class="dstat"><p id="w-d1l">Total Applications</p><strong>1,284</strong><em>+12% this week</em></div>
+      <div class="dstat"><p id="w-d2l">Active Jobs</p><strong>9</strong><em>3 closing soon</em></div>
+      <div class="dstat"><p id="w-d3l">Profile Views</p><strong>4,730</strong><em>+28%</em></div>
+      <div class="dstat"><p id="w-d4l">Hired (This Month)</p><strong>14</strong><em class="d">-2 vs last</em></div>
+    </div>
+    <div class="card pad" style="margin-bottom:12px">
+      <div class="sec-title" id="w-active-jobs">Active Job Postings</div>
+      <table class="jtable">
+        <thead><tr><th id="w-th1">Position</th><th id="w-th2">Location</th><th id="w-th3">Applications</th><th id="w-th4">Status</th><th></th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:500" id="w-j1t">Senior Software Engineer</td><td style="color:var(--muted)">Dhahran</td><td>312</td><td><span class="jstatus js-a" id="w-active">Active</span></td><td><button class="act-btn" onclick="showToast('Managing job...')" id="w-manage">Manage</button></td></tr>
+          <tr><td style="font-weight:500" id="w-j2t">Data Scientist</td><td style="color:var(--muted)">Riyadh</td><td>187</td><td><span class="jstatus js-a">Active</span></td><td><button class="act-btn" onclick="showToast('Managing job...')" id="w-manage2">Manage</button></td></tr>
+          <tr><td style="font-weight:500" id="w-j3t">HR Business Partner</td><td style="color:var(--muted)">Jeddah</td><td>94</td><td><span class="jstatus js-p" id="w-paused">Paused</span></td><td><button class="act-btn" onclick="showToast('Managing job...')" id="w-manage3">Manage</button></td></tr>
+          <tr><td style="font-weight:500" id="w-j4t">DevOps Engineer</td><td style="color:var(--muted)">Dhahran</td><td>211</td><td><span class="jstatus js-a">Active</span></td><td><button class="act-btn" onclick="showToast('Managing job...')" id="w-manage4">Manage</button></td></tr>
+          <tr><td style="font-weight:500" id="w-j5t">UX Designer</td><td style="color:var(--muted)">Remote</td><td>76</td><td><span class="jstatus js-c" id="w-closing">Closing Soon</span></td><td><button class="act-btn" onclick="showToast('Managing job...')" id="w-manage5">Manage</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card pad">
+      <div class="sec-title" id="w-recent-apps">Recent Applications — Senior Software Engineer</div>
+      <div class="applist">
+        <div class="appitem"><div class="appava" style="background:#0f4c81">AM</div><div class="appinfo"><h5>Ahmed Malik</h5><p>5 yrs · React, Node.js · Riyadh</p></div><div class="app-acts"><button class="abt abt-y" onclick="showToast('Ahmed shortlisted!')" id="w-accept">Accept</button><button class="abt abt-n" onclick="showToast('Declined')" id="w-decline">Decline</button></div></div>
+        <div class="appitem"><div class="appava" style="background:#15803d">SR</div><div class="appinfo"><h5>Sara Rahman</h5><p>7 yrs · Full Stack · Jeddah</p></div><div class="app-acts"><button class="abt abt-y" onclick="showToast('Sara shortlisted!')" id="w-accept2">Accept</button><button class="abt abt-n" onclick="showToast('Declined')" id="w-decline2">Decline</button></div></div>
+        <div class="appitem"><div class="appava" style="background:#c47f17">KA</div><div class="appinfo"><h5>Kareem Al-Amin</h5><p>3 yrs · Python, AWS · Dhahran</p></div><div class="app-acts"><button class="abt abt-y" onclick="showToast('Kareem shortlisted!')" id="w-accept3">Accept</button><button class="abt abt-n" onclick="showToast('Declined')" id="w-decline3">Decline</button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PROFILE PAGE ═══════════ -->
+<div id="p-profile" class="page">
+  <div style="max-width:700px;margin:14px auto;padding:0 14px">
+    <div class="card" style="margin-bottom:12px">
+      <div class="prof-banner"></div>
+      <div class="prof-ava-row">
+        <div class="prof-ava" style="background:var(--acc)">AM</div>
+        <div class="prof-actions">
+          <button class="act-btn" onclick="showToast('Edit mode...')" id="w-edit">Edit Profile</button>
+          <button class="pbtn" onclick="showToast('CV downloading...')" id="w-cv">Download CV</button>
+        </div>
+      </div>
+      <div class="prof-body">
+        <h2 id="w-pname">Ahmed Malik</h2>
+        <div class="sub" id="w-prole">Senior Software Engineer</div>
+        <div class="loc" id="w-ploc">Riyadh, Saudi Arabia · Open to work</div>
+        <div class="prof-stats">
+          <div class="ps"><strong>142</strong><span id="w-pconn">Connections</span></div>
+          <div class="ps"><strong>38</strong><span id="w-papp">Applications</span></div>
+          <div class="ps"><strong>12</strong><span id="w-pend">Endorsements</span></div>
+          <div class="ps"><strong>4</strong><span id="w-poff">Offers</span></div>
+        </div>
+        <div class="sec">
+          <h4 id="w-about">About</h4>
+          <p style="font-size:13px;line-height:1.65" id="w-abouttxt">Full-stack developer with 5+ years experience. Expertise in React, Node.js and AWS. Interested in Riyadh or remote opportunities.</p>
+        </div>
+        <div class="sec">
+          <h4 id="w-skills">Skills</h4>
+          <span class="skill-pill">React.js</span><span class="skill-pill">Node.js</span><span class="skill-pill">Python</span><span class="skill-pill">AWS</span><span class="skill-pill">MongoDB</span><span class="skill-pill">TypeScript</span><span class="skill-pill">GraphQL</span><span class="skill-pill">Docker</span>
+        </div>
+        <div class="sec">
+          <h4 id="w-exp">Experience</h4>
+          <div class="exp-item"><h5 id="w-e1">Senior Developer — STC Group</h5><p>Jan 2022 – Present · Riyadh</p></div>
+          <div class="exp-item"><h5 id="w-e2">Full Stack Developer — Mawdoo3.com</h5><p>Mar 2019 – Dec 2021 · Remote</p></div>
+          <div class="exp-item"><h5 id="w-e3">Junior Developer — Elm Company</h5><p>Jun 2017 – Feb 2019 · Riyadh</p></div>
+        </div>
+        <div class="sec">
+          <h4 id="w-edu">Education</h4>
+          <div class="exp-item"><h5 id="w-edu1">BS Computer Science — KFUPM</h5><p>2013 – 2017 · Dhahran</p></div>
+        </div>
+        <div class="sec">
+          <h4 id="w-conns">Connections</h4>
+          <div class="conn-grid">
+            <div class="conn-card"><div class="conn-ava" style="background:#0f4c81">KA</div><div><h6>Khalid Al-Rashidi</h6><p>Career Coach</p></div></div>
+            <div class="conn-card"><div class="conn-ava" style="background:#15803d">FH</div><div><h6>Fatima Hassan</h6><p>HR Manager</p></div></div>
+            <div class="conn-card"><div class="conn-ava" style="background:#b91c1c">MR</div><div><h6>Mariam Raza</h6><p>Product Manager</p></div></div>
+            <div class="conn-card"><div class="conn-ava" style="background:#c47f17">OS</div><div><h6>Omar Siddiqui</h6><p>Data Scientist</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ LOGIN PAGE ═══════════ -->
+<div id="p-login" class="page">
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-logo"><span class="j">J</span><span class="ob">ob</span><span class="s">Souq</span><span class="k">KSA</span></div>
+      <div class="login-sub" id="w-lsub">Saudi Arabia's #1 Professional Job Network</div>
+      <div class="rtabs">
+        <div class="rtab on" onclick="rtab(this,'si')" id="w-lsignin">Sign In</div>
+        <div class="rtab" onclick="rtab(this,'reg')" id="w-lreg">Register</div>
+      </div>
+      <div id="si-form">
+        <input class="inp" type="email" id="w-email" placeholder="Email address">
+        <input class="inp" type="password" id="w-pass" placeholder="Password">
+        <p style="font-size:11px;color:var(--p);text-align:right;cursor:pointer;margin-bottom:2px" id="w-forgot">Forgot password?</p>
+        <button class="lbtn" onclick="showToast('Logging in...')" id="w-sibtn">Sign In</button>
+        <div class="ldiv" id="w-or">or</div>
+        <button class="lsoc" onclick="showToast('Google login...')" id="w-google">Continue with Google</button>
+        <button class="lsoc" onclick="showToast('LinkedIn login...')" id="w-linkedin">Continue with LinkedIn</button>
+      </div>
+      <div id="reg-form" style="display:none">
+        <div class="role-grid">
+          <div class="role-opt on" onclick="selRole(this)" id="w-rseek">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Job Seeker
+          </div>
+          <div class="role-opt" onclick="selRole(this)" id="w-rcomp">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Company
+          </div>
+        </div>
+        <input class="inp" type="text" id="w-rname" placeholder="Full Name">
+        <input class="inp" type="email" id="w-remail" placeholder="Email address">
+        <input class="inp" type="password" id="w-rpass" placeholder="Password">
+        <button class="lbtn" onclick="showToast('Account created! Welcome to JobSouqKSA!')" id="w-regbtn">Create Account</button>
+      </div>
+      <div class="llink" id="w-noac">Don't have an account? <a onclick="document.querySelectorAll('.rtab')[1].click()">Register here</a></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var LANG='en';
+var TX={
+en:{
+  'w-uname':'Ahmed Malik','w-urole':'Software Engineer · Riyadh','w-conn':'Connections','w-app':'Applied',
+  'w-home':'Home Feed','w-dash':'Dashboard','w-prof':'My Profile','w-saved':'Saved Jobs','w-apps':'Applications','w-signin':'Sign In',
+  'w-trending':'Trending Skills','w-compose':'Share your experience or post a job...','w-photo':'Photo','w-jobpost':'Job Post','w-resume':'Resume','w-postbtn':'Post',
+  'w-all':'All Posts','w-jobs':'Job Posts','w-hiring':'Hiring','w-tips':'Career Tips',
+  'w-p1name':'Saudi Aramco · Verified','w-p1sub':'Oil & Energy · Dhahran','w-p1time':'2 hours ago','w-p1badge':'Company',
+  'w-p1job':'Senior Software Engineer — Digital Solutions','w-p1loc':'Dhahran, KSA','w-p1type':'Full Time','w-p1exp':'5+ Years',
+  'w-p1desc':'React, Node.js and cloud experience required. Strong problem-solving skills essential.',
+  'w-p1apply':'Apply Now','w-save':'Save','w-share':'Share',
+  'w-p2sub':'HR Manager · Riyadh','w-p2time':'5 hours ago','w-p2badge':'Hiring',
+  'w-p2txt':'Urgent! We need candidates for 3 positions:\n\n• Digital Marketing Manager\n• Content Writer (Arabic / English)\n• Sales Executive\n\nInterested candidates DM below. Deadline tomorrow.',
+  'w-save2':'Save','w-connect':'Connect',
+  'w-p3sub':'Career Coach · Riyadh','w-p3time':'1 day ago','w-p3badge':'Career Tip',
+  'w-p3txt':'Interview tip: Read the company\'s recent news before your interview. When asked "What do you know about us?" — mention their latest project or achievement. This 5-minute preparation separates you from 80% of candidates.',
+  'w-save3':'Save','w-share3':'Share',
+  'w-topco':'Top Companies','w-follow':'Following','w-follow2':'Follow','w-follow3':'Follow','w-follow4':'Follow',
+  'w-jobs2':'jobs','w-jobs3':'jobs','w-jobs4':'jobs','w-jobs5':'jobs',
+  'w-alerts':'Job Alerts','w-a1':'React Developer','w-a2':'Data Analyst','w-a3':'UX Designer',
+  'w-platform':'Platform','w-s1':'Job Seekers','w-s2':'Companies','w-s3':'Active Jobs','w-s4':'Hired Today',
+  'w-dname':'Saudi Aramco','w-dadmin':'Company Dashboard · Admin View','w-newjob':'+ New Job Post',
+  'w-d1l':'Total Applications','w-d2l':'Active Jobs','w-d3l':'Profile Views','w-d4l':'Hired (This Month)',
+  'w-active-jobs':'Active Job Postings','w-th1':'Position','w-th2':'Location','w-th3':'Applications','w-th4':'Status',
+  'w-j1t':'Senior Software Engineer','w-j2t':'Data Scientist','w-j3t':'HR Business Partner','w-j4t':'DevOps Engineer','w-j5t':'UX Designer',
+  'w-active':'Active','w-paused':'Paused','w-closing':'Closing Soon',
+  'w-manage':'Manage','w-manage2':'Manage','w-manage3':'Manage','w-manage4':'Manage','w-manage5':'Manage',
+  'w-recent-apps':'Recent Applications — Senior Software Engineer',
+  'w-accept':'Accept','w-decline':'Decline','w-accept2':'Accept','w-decline2':'Decline','w-accept3':'Accept','w-decline3':'Decline',
+  'w-edit':'Edit Profile','w-cv':'Download CV',
+  'w-pname':'Ahmed Malik','w-prole':'Senior Software Engineer','w-ploc':'Riyadh, Saudi Arabia · Open to work',
+  'w-pconn':'Connections','w-papp':'Applications','w-pend':'Endorsements','w-poff':'Offers',
+  'w-about':'About','w-abouttxt':'Full-stack developer with 5+ years experience. Expertise in React, Node.js and AWS. Interested in Riyadh or remote opportunities.',
+  'w-skills':'Skills','w-exp':'Experience','w-edu':'Education','w-conns':'Connections',
+  'w-e1':'Senior Developer — STC Group','w-e2':'Full Stack Developer — Mawdoo3.com','w-e3':'Junior Developer — Elm Company',
+  'w-edu1':'BS Computer Science — KFUPM',
+  'w-lsub':"Saudi Arabia's #1 Professional Job Network",'w-lsignin':'Sign In','w-lreg':'Register',
+  'w-email':'Email address','w-pass':'Password','w-forgot':'Forgot password?','w-sibtn':'Sign In','w-or':'or',
+  'w-google':'Continue with Google','w-linkedin':'Continue with LinkedIn',
+  'w-rseek':'Job Seeker','w-rcomp':'Company',
+  'w-rname':'Full Name','w-remail':'Email address','w-rpass':'Password','w-regbtn':'Create Account',
+  'w-noac':"Don't have an account? Register here"
+},
+ar:{
+  'w-uname':'أحمد مالك','w-urole':'مهندس برمجيات · الرياض','w-conn':'اتصالات','w-app':'تقديمات',
+  'w-home':'الرئيسية','w-dash':'لوحة التحكم','w-prof':'ملفي الشخصي','w-saved':'الوظائف المحفوظة','w-apps':'طلباتي','w-signin':'تسجيل الدخول',
+  'w-trending':'المهارات الرائجة','w-compose':'شارك خبرتك أو انشر وظيفة...','w-photo':'صورة','w-jobpost':'وظيفة','w-resume':'سيرة ذاتية','w-postbtn':'نشر',
+  'w-all':'جميع المنشورات','w-jobs':'وظائف','w-hiring':'توظيف','w-tips':'نصائح مهنية',
+  'w-p1name':'أرامكو السعودية · موثّق','w-p1sub':'نفط وطاقة · الظهران','w-p1time':'منذ ساعتين','w-p1badge':'شركة',
+  'w-p1job':'مهندس برمجيات أول — الحلول الرقمية','w-p1loc':'الظهران، المملكة','w-p1type':'دوام كامل','w-p1exp':'5+ سنوات',
+  'w-p1desc':'يُشترط خبرة في React وNode.js والسحابة. مهارات قوية في حل المشكلات ضرورية.',
+  'w-p1apply':'تقدّم الآن','w-save':'حفظ','w-share':'مشاركة',
+  'w-p2sub':'مديرة موارد بشرية · الرياض','w-p2time':'منذ 5 ساعات','w-p2badge':'توظيف',
+  'w-p2txt':'عاجل! نبحث عن مرشحين لـ3 وظائف:\n\n• مدير تسويق رقمي\n• كاتب محتوى (عربي/إنجليزي)\n• مندوب مبيعات\n\nالمهتمون يتواصلون أدناه. الموعد النهائي غداً.',
+  'w-save2':'حفظ','w-connect':'تواصل',
+  'w-p3sub':'مدرب مهني · الرياض','w-p3time':'منذ يوم','w-p3badge':'نصيحة مهنية',
+  'w-p3txt':'نصيحة مقابلات: اقرأ أحدث أخبار الشركة قبل المقابلة. عند سؤالك "ماذا تعرف عنّا؟" — اذكر مشروعهم أو إنجازهم الأخير. هذا التحضير يميزك عن 80٪ من المتقدمين.',
+  'w-save3':'حفظ','w-share3':'مشاركة',
+  'w-topco':'أبرز الشركات','w-follow':'متابَع','w-follow2':'متابعة','w-follow3':'متابعة','w-follow4':'متابعة',
+  'w-jobs2':'وظائف','w-jobs3':'وظائف','w-jobs4':'وظائف','w-jobs5':'وظائف',
+  'w-alerts':'تنبيهات الوظائف','w-a1':'مطور React','w-a2':'محلل بيانات','w-a3':'مصمم UX',
+  'w-platform':'الإحصائيات','w-s1':'باحثو عمل','w-s2':'شركات','w-s3':'وظائف نشطة','w-s4':'تم توظيفهم اليوم',
+  'w-dname':'أرامكو السعودية','w-dadmin':'لوحة تحكم الشركة','w-newjob':'+ نشر وظيفة جديدة',
+  'w-d1l':'إجمالي الطلبات','w-d2l':'الوظائف النشطة','w-d3l':'مشاهدات الملف','w-d4l':'المعيّنون (هذا الشهر)',
+  'w-active-jobs':'الوظائف المنشورة','w-th1':'المسمى','w-th2':'الموقع','w-th3':'الطلبات','w-th4':'الحالة',
+  'w-j1t':'مهندس برمجيات أول','w-j2t':'عالم بيانات','w-j3t':'شريك موارد بشرية','w-j4t':'مهندس DevOps','w-j5t':'مصمم UX',
+  'w-active':'نشط','w-paused':'موقوف','w-closing':'يُغلق قريباً',
+  'w-manage':'إدارة','w-manage2':'إدارة','w-manage3':'إدارة','w-manage4':'إدارة','w-manage5':'إدارة',
+  'w-recent-apps':'الطلبات الأخيرة — مهندس برمجيات أول',
+  'w-accept':'قبول','w-decline':'رفض','w-accept2':'قبول','w-decline2':'رفض','w-accept3':'قبول','w-decline3':'رفض',
+  'w-edit':'تعديل الملف','w-cv':'تحميل السيرة',
+  'w-pname':'أحمد مالك','w-prole':'مهندس برمجيات أول','w-ploc':'الرياض، المملكة العربية السعودية',
+  'w-pconn':'اتصالات','w-papp':'طلبات','w-pend':'توصيات','w-poff':'عروض',
+  'w-about':'نبذة عني','w-abouttxt':'مطور متكامل بخبرة 5+ سنوات. خبرة في React وNode.js وAWS. مهتم بفرص في الرياض أو عن بُعد.',
+  'w-skills':'المهارات','w-exp':'الخبرات','w-edu':'التعليم','w-conns':'الاتصالات',
+  'w-e1':'مطور أول — مجموعة STC','w-e2':'مطور متكامل — موضوع.كوم','w-e3':'مطور مبتدئ — شركة علم',
+  'w-edu1':'بكالوريوس علوم حاسب — جامعة الملك فهد',
+  'w-lsub':'شبكة العمل المهنية الأولى في المملكة','w-lsignin':'تسجيل الدخول','w-lreg':'إنشاء حساب',
+  'w-email':'البريد الإلكتروني','w-pass':'كلمة المرور','w-forgot':'نسيت كلمة المرور؟','w-sibtn':'تسجيل الدخول','w-or':'أو',
+  'w-google':'المتابعة عبر Google','w-linkedin':'المتابعة عبر LinkedIn',
+  'w-rseek':'باحث عن عمل','w-rcomp':'شركة',
+  'w-rname':'الاسم الكامل','w-remail':'البريد الإلكتروني','w-rpass':'كلمة المرور','w-regbtn':'إنشاء حساب',
+  'w-noac':'ليس لديك حساب؟ سجّل هنا'
+}
+};
+
+function setLang(l,el){
+  LANG=l;
+  document.querySelectorAll('.lopt').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  var t=TX[l],rtl=l==='ar';
+  document.body.style.direction=rtl?'rtl':'ltr';
+  document.body.style.textAlign=rtl?'right':'left';
+  Object.keys(t).forEach(id=>{
+    var elem=document.getElementById(id);
+    if(!elem)return;
+    if(elem.tagName==='INPUT')elem.placeholder=t[id];
+    else elem.textContent=t[id];
+  });
+}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById('p-'+p).classList.add('on')}
+function navOn(e){document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));e.classList.add('on')}
+function showToast(m){var t=document.getElementById('toast');t.textContent=LANG==='ar'?'تم بنجاح!':m;t.style.transform='translateY(0)';t.style.opacity='1';clearTimeout(t._to);t._to=setTimeout(()=>{t.style.transform='translateY(50px)';t.style.opacity='0'},2600)}
+function lk(b){var s=b.querySelector('.lc');if(b.classList.contains('liked')){b.classList.remove('liked');s.textContent=parseInt(s.textContent)-1}else{b.classList.add('liked');s.textContent=parseInt(s.textContent)+1;showToast('Post liked!')}}
+function fw(b){if(b.classList.contains('fw')){b.classList.remove('fw');b.textContent=LANG==='ar'?'متابعة':'Follow';showToast('Unfollowed')}else{b.classList.add('fw');b.textContent=LANG==='ar'?'متابَع':'Following';showToast('Company followed!')}}
+function ft(e){document.querySelectorAll('.ft').forEach(t=>t.classList.remove('on'));e.classList.add('on');showToast(e.textContent+' filter applied!')}
+function rtab(e,t){document.querySelectorAll('.rtab').forEach(x=>x.classList.remove('on'));e.classList.add('on');document.getElementById('si-form').style.display=t==='si'?'block':'none';document.getElementById('reg-form').style.display=t==='reg'?'block':'none';document.getElementById('w-noac').style.display=t==='si'?'block':'none'}
+function selRole(el){document.querySelectorAll('.role-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on');showToast(el.id==='w-rseek'?(LANG==='ar'?'باحث عن عمل محدد':'Job Seeker selected'):(LANG==='ar'?'شركة محددة':'Company selected'))}
+// ════════════════════════════════════════════════
+//  JobSouqKSA — Frontend API Service Layer
+//  Connects HTML frontend to Node.js backend
+// ════════════════════════════════════════════════
+
+const API_BASE = 'https://jobsouqksa-backend-production.up.railway.app/api';
+
+// ─── Token helpers ────────────────────────────────
+const getToken  = ()          => localStorage.getItem('jsq_token');
+const setToken  = (t)         => localStorage.setItem('jsq_token', t);
+const clearToken = ()         => localStorage.removeItem('jsq_token');
+const getUser   = ()          => JSON.parse(localStorage.getItem('jsq_user') || 'null');
+const setUser   = (u)         => localStorage.setItem('jsq_user', JSON.stringify(u));
+const clearUser = ()          => localStorage.removeItem('jsq_user');
+
+// ─── Base fetch wrapper ───────────────────────────
+async function apiFetch(endpoint, options = {}) {
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json', ...options.headers };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+  const data = await res.json();
+
+  if (!res.ok) {
+    const err = new Error(data.message || 'API Error');
+    err.status  = res.status;
+    err.data    = data;
+    throw err;
+  }
+  return data;
+}
+
+// ─── Multipart form (file uploads) ───────────────
+async function apiUpload(endpoint, formData) {
+  const token = getToken();
+  const res = await fetch(`${API_BASE}${endpoint}`, {
+    method:  'POST',
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body:    formData
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Upload failed');
+  return data;
+}
+
+// ════════════════════════════════════════════════
+//  AUTH API
+// ════════════════════════════════════════════════
+const Auth = {
+  register: async (name, email, password, role = 'jobseeker') => {
+    const data = await apiFetch('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password, role })
+    });
+    if (data.token) { setToken(data.token); setUser(data.user); }
+    return data;
+  },
+
+  login: async (email, password) => {
+    const data = await apiFetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
+    if (data.token) { setToken(data.token); setUser(data.user); }
+    return data;
+  },
+
+  googleLogin: async (googleToken, role = 'jobseeker') => {
+    const data = await apiFetch('/auth/google', {
+      method: 'POST',
+      body: JSON.stringify({ token: googleToken, role })
+    });
+    if (data.token) { setToken(data.token); setUser(data.user); }
+    return data;
+  },
+
+  logout: async () => {
+    try { await apiFetch('/auth/logout', { method: 'POST' }); } catch {}
+    clearToken(); clearUser();
+    window.location.reload();
+  },
+
+  getMe: ()                    => apiFetch('/auth/me'),
+
+  forgotPassword: (email)      => apiFetch('/auth/forgot-password', {
+    method: 'POST', body: JSON.stringify({ email })
+  }),
+
+  resetPassword: (token, password) => apiFetch(`/auth/reset-password/${token}`, {
+    method: 'PUT', body: JSON.stringify({ password })
+  }),
+
+  changePassword: (currentPassword, newPassword) => apiFetch('/auth/change-password', {
+    method: 'PUT', body: JSON.stringify({ currentPassword, newPassword })
+  }),
+
+  isLoggedIn: () => !!getToken(),
+  currentUser: () => getUser()
+};
+
+// ════════════════════════════════════════════════
+//  JOBS API
+// ════════════════════════════════════════════════
+const Jobs = {
+  getAll: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/jobs${qs ? '?' + qs : ''}`);
+  },
+
+  getById:      (id)              => apiFetch(`/jobs/${id}`),
+  getMyJobs:    ()                => apiFetch('/jobs/my-jobs'),
+  getRecommended: ()              => apiFetch('/jobs/recommended'),
+
+  create: (jobData)               => apiFetch('/jobs', {
+    method: 'POST', body: JSON.stringify(jobData)
+  }),
+
+  update: (id, jobData)           => apiFetch(`/jobs/${id}`, {
+    method: 'PUT', body: JSON.stringify(jobData)
+  }),
+
+  delete: (id)                    => apiFetch(`/jobs/${id}`, { method: 'DELETE' }),
+
+  toggleSave: (id)                => apiFetch(`/jobs/${id}/save`, { method: 'POST' }),
+
+  search: (keyword, filters = {}) => Jobs.getAll({ keyword, ...filters })
+};
+
+// ════════════════════════════════════════════════
+//  APPLICATIONS API
+// ════════════════════════════════════════════════
+const Applications = {
+  apply: (jobId, coverLetter, answers = []) => apiFetch('/applications', {
+    method: 'POST', body: JSON.stringify({ jobId, coverLetter, answers })
+  }),
+
+  getMy: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/applications/my${qs ? '?' + qs : ''}`);
+  },
+
+  getForJob:     (jobId, params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/applications/job/${jobId}${qs ? '?' + qs : ''}`);
+  },
+
+  updateStatus:  (id, status, note, interviewDate) => apiFetch(`/applications/${id}/status`, {
+    method: 'PUT', body: JSON.stringify({ status, note, interviewDate })
+  }),
+
+  withdraw:      (id)             => apiFetch(`/applications/${id}/withdraw`, { method: 'DELETE' }),
+
+  getCompanyStats: (companyId)    => apiFetch(`/applications/company/${companyId}/stats`)
+};
+
+// ════════════════════════════════════════════════
+//  USERS API
+// ════════════════════════════════════════════════
+const Users = {
+  getById: (id)                   => apiFetch(`/users/${id}`),
+
+  search: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/users/search${qs ? '?' + qs : ''}`);
+  },
+
+  updateProfile: (profileData)    => apiFetch('/users/profile', {
+    method: 'PUT', body: JSON.stringify(profileData)
+  }),
+
+  uploadAvatar: (file) => {
+    const fd = new FormData(); fd.append('avatar', file);
+    return apiUpload('/users/avatar', fd);
+  },
+
+  uploadResume: (file) => {
+    const fd = new FormData(); fd.append('resume', file);
+    return apiUpload('/users/resume', fd);
+  },
+
+  sendConnectionRequest: (userId) => apiFetch(`/users/${userId}/connect`, { method: 'POST' }),
+
+  respondToConnection: (requestId, action) => apiFetch(`/users/connections/${requestId}`, {
+    method: 'PUT', body: JSON.stringify({ action })
+  })
+};
+
+// ════════════════════════════════════════════════
+//  COMPANIES API
+// ════════════════════════════════════════════════
+const Companies = {
+  getAll: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/companies${qs ? '?' + qs : ''}`);
+  },
+
+  getById:       (id)             => apiFetch(`/companies/${id}`),
+
+  create: (companyData)           => apiFetch('/companies', {
+    method: 'POST', body: JSON.stringify(companyData)
+  }),
+
+  update: (id, companyData)       => apiFetch(`/companies/${id}`, {
+    method: 'PUT', body: JSON.stringify(companyData)
+  }),
+
+  toggleFollow:  (id)             => apiFetch(`/companies/${id}/follow`, { method: 'POST' })
+};
+
+// ════════════════════════════════════════════════
+//  MESSAGES API
+// ════════════════════════════════════════════════
+const Messages = {
+  getConversations: ()            => apiFetch('/messages/conversations'),
+  getMessages: (conversationId)   => apiFetch(`/messages/conversations/${conversationId}`),
+  send: (recipientId, content)    => apiFetch('/messages', {
+    method: 'POST', body: JSON.stringify({ recipientId, content })
+  })
+};
+
+// ════════════════════════════════════════════════
+//  NOTIFICATIONS API
+// ════════════════════════════════════════════════
+const Notifications = {
+  getAll:    (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return apiFetch(`/notifications${qs ? '?' + qs : ''}`);
+  },
+  markRead:  (ids = [])   => apiFetch('/notifications/read', {
+    method: 'PUT', body: JSON.stringify({ ids })
+  })
+};
+
+// ════════════════════════════════════════════════
+//  SOCKET.IO — Real-time
+// ════════════════════════════════════════════════
+let socket = null;
+
+const SocketService = {
+  connect: () => {
+    if (typeof io === 'undefined') {
+      console.warn('Socket.IO client not loaded. Add <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>');
+      return null;
+    }
+    socket = io('http://localhost:5000');
+    const user = getUser();
+    if (user) socket.emit('user_online', user._id);
+    return socket;
+  },
+
+  disconnect: () => { if (socket) socket.disconnect(); },
+
+  onMessage: (cb)      => socket?.on('receive_message', cb),
+  onTyping:  (cb)      => socket?.on('user_typing', cb),
+  onOnlineUsers: (cb)  => socket?.on('online_users', cb),
+
+  sendMessage: (recipientId, message) => {
+    socket?.emit('send_message', { recipientId, message });
+  },
+
+  sendTyping: (recipientId) => {
+    const user = getUser();
+    socket?.emit('typing', { recipientId, senderId: user?._id });
+  }
+};
+
+// ════════════════════════════════════════════════
+//  UI STATE MANAGER
+// ════════════════════════════════════════════════
+const UI = {
+  // Show toast notification
+  toast: (message, type = 'success') => {
+    const existing = document.getElementById('jsq-toast');
+    if (existing) existing.remove();
+
+    const colors = { success: '#15803d', error: '#b91c1c', info: '#0f4c81', warning: '#c47f17' };
+    const t = document.createElement('div');
+    t.id = 'jsq-toast';
+    t.textContent = message;
+    Object.assign(t.style, {
+      position: 'fixed', bottom: '20px', right: '20px',
+      background: colors[type] || colors.info,
+      color: '#fff', padding: '10px 18px', borderRadius: '8px',
+      fontSize: '13px', zIndex: '9999', maxWidth: '280px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+      transition: 'all 0.3s', opacity: '0', transform: 'translateY(10px)'
+    });
+    document.body.appendChild(t);
+    requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)'; });
+    setTimeout(() => {
+      t.style.opacity = '0'; t.style.transform = 'translateY(10px)';
+      setTimeout(() => t.remove(), 300);
+    }, 3000);
+  },
+
+  // Show loading spinner
+  loading: (show, containerId) => {
+    const container = containerId ? document.getElementById(containerId) : document.body;
+    const existing = container.querySelector('.jsq-spinner');
+    if (show && !existing) {
+      const spinner = document.createElement('div');
+      spinner.className = 'jsq-spinner';
+      Object.assign(spinner.style, {
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '40px', width: '100%'
+      });
+      spinner.innerHTML = `
+        <div style="width:32px;height:32px;border:3px solid #e8f1fb;border-top-color:#0f4c81;
+                    border-radius:50%;animation:spin 0.8s linear infinite"></div>
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>`;
+      container.appendChild(spinner);
+    } else if (!show && existing) {
+      existing.remove();
+    }
+  },
+
+  // Format date
+  timeAgo: (dateStr) => {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins  = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days  = Math.floor(diff / 86400000);
+    if (mins  < 1)  return 'Just now';
+    if (mins  < 60) return `${mins}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    if (days  < 7)  return `${days}d ago`;
+    return new Date(dateStr).toLocaleDateString();
+  },
+
+  // Format salary
+  formatSalary: (salary) => {
+    if (!salary?.min && !salary?.max) return 'Negotiable';
+    const fmt = n => n?.toLocaleString();
+    const range = salary.min && salary.max
+      ? `${fmt(salary.min)} – ${fmt(salary.max)}`
+      : fmt(salary.min || salary.max);
+    return `${salary.currency || 'SAR'} ${range} / ${salary.period || 'Month'}`;
+  },
+
+  // Render avatar initials
+  initials: (name = '') => name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+};
+
+// ════════════════════════════════════════════════
+//  FEED RENDERER — renders posts & jobs into DOM
+// ════════════════════════════════════════════════
+const Feed = {
+  // Render a job card into the feed
+  renderJobCard: (job) => `
+    <div class="post card pad" data-job-id="${job._id}">
+      <div class="ph">
+        <div class="pa" style="background:#0f4c81;border-radius:8px">
+          ${job.company?.logo
+            ? `<img src="${job.company.logo}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">`
+            : UI.initials(job.company?.name || 'Co')}
+        </div>
+        <div class="pm">
+          <h4>${job.company?.name || 'Company'}
+            ${job.company?.isVerified ? '<span style="color:#0f4c81;font-size:11px"> · ✓ Verified</span>' : ''}
+          </h4>
+          <p>${job.company?.industry || ''} · ${job.location?.city || ''}</p>
+          <span class="pt">${UI.timeAgo(job.createdAt)}</span>
+        </div>
+        <div class="pbadge${job.urgent ? ' hire' : ''}">
+          ${job.urgent ? 'Urgent' : job.featured ? 'Featured' : 'Job'}
+        </div>
+      </div>
+      <div class="jbox">
+        <h5>${job.title}</h5>
+        <div class="jmeta">
+          <span class="jtag">${job.location?.city}${job.location?.remote ? ' · Remote' : ''}</span>
+          <span class="jtag">${job.jobType}</span>
+          <span class="jtag">${job.experienceLevel}</span>
+          ${job.salary?.isVisible ? `<span class="jtag stag">${UI.formatSalary(job.salary)}</span>` : ''}
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:7px;line-height:1.55">
+          ${(job.description || '').slice(0, 150)}${job.description?.length > 150 ? '...' : ''}
+        </p>
+        <div style="display:flex;gap:5px;margin-top:8px">
+          <button class="abtn${job.hasApplied ? ' applied' : ''}"
+            onclick="handleApply('${job._id}', this)"
+            style="flex:1;${job.hasApplied ? 'background:#15803d' : ''}">
+            ${job.hasApplied ? '✓ Applied' : 'Apply Now'}
+          </button>
+          <button onclick="handleSaveJob('${job._id}', this)"
+            style="background:none;border:0.5px solid var(--border);border-radius:6px;padding:8px 12px;
+                   font-size:12px;cursor:pointer;color:${job.isSaved ? '#0f4c81' : 'var(--muted)'}">
+            ${job.isSaved ? '🔖 Saved' : 'Save'}
+          </button>
+        </div>
+      </div>
+      <div class="pacts">
+        <button class="acbt" onclick="UI.toast('${job.applications} applications so far')">
+          👥 ${job.applications || 0} applicants
+        </button>
+        <button class="acbt" onclick="UI.toast('Link copied!')" style="margin-left:auto">Share</button>
+      </div>
+    </div>`,
+
+  // Render job list into container
+  renderJobs: async (containerId, params = {}) => {
+    UI.loading(true, containerId);
+    try {
+      const res = await Jobs.getAll({ ...params, limit: 10 });
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      if (!res.data?.length) {
+        container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px">No jobs found</p>';
+        return;
+      }
+      container.innerHTML = res.data.map(Feed.renderJobCard).join('');
+    } catch (err) {
+      UI.toast(err.message, 'error');
+    } finally {
+      UI.loading(false, containerId);
+    }
+  },
+
+  // Render application list
+  renderApplications: async (containerId) => {
+    UI.loading(true, containerId);
+    try {
+      const res = await Applications.getMy();
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      if (!res.data?.length) {
+        container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px">No applications yet</p>';
+        return;
+      }
+      const statusColors = {
+        pending:     { bg: '#fef9ee', color: '#854f0b' },
+        reviewed:    { bg: '#e8f1fb', color: '#0c447c' },
+        shortlisted: { bg: '#f0fdf4', color: '#166534' },
+        interview:   { bg: '#f0fdf4', color: '#166534' },
+        offer:       { bg: '#f0fdf4', color: '#15803d' },
+        rejected:    { bg: '#fee2e2', color: '#b91c1c' },
+        withdrawn:   { bg: '#f3f4f6', color: '#6b7280' }
+      };
+      container.innerHTML = res.data.map(app => {
+        const sc = statusColors[app.status] || statusColors.pending;
+        return `
+          <div class="appitem" style="margin-bottom:8px">
+            <div class="appava" style="background:#0f4c81">${UI.initials(app.job?.company?.name)}</div>
+            <div class="appinfo">
+              <h5>${app.job?.title || 'Job'}</h5>
+              <p>${app.job?.company?.name || ''} · ${UI.timeAgo(app.createdAt)}</p>
+            </div>
+            <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+              <span style="background:${sc.bg};color:${sc.color};font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500">
+                ${app.status.charAt(0).toUpperCase() + app.status.slice(1)}
+              </span>
+              ${app.status === 'pending' ? `<button onclick="handleWithdraw('${app._id}',this)" style="font-size:10px;color:var(--muted);background:none;border:none;cursor:pointer">Withdraw</button>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+    } catch (err) {
+      UI.toast(err.message, 'error');
+    } finally {
+      UI.loading(false, containerId);
+    }
+  },
+
+  // Render notifications
+  renderNotifications: async (containerId) => {
+    try {
+      const res = await Notifications.getAll({ limit: 20 });
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      if (!res.data?.length) {
+        container.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px">No notifications</p>';
+        return;
+      }
+      container.innerHTML = res.data.map(n => `
+        <div style="display:flex;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border);
+                    opacity:${n.isRead ? 0.7 : 1};cursor:pointer"
+             onclick="Notifications.markRead(['${n._id}'])">
+          <div style="width:8px;height:8px;border-radius:50%;background:${n.isRead ? 'transparent' : '#0f4c81'};
+                      flex:none;margin-top:5px"></div>
+          <div>
+            <div style="font-size:12px;font-weight:${n.isRead ? 400 : 600}">${n.title}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:1px">${n.body}</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px">${UI.timeAgo(n.createdAt)}</div>
+          </div>
+        </div>`).join('');
+    } catch (err) {
+      console.error('Notifications error:', err);
+    }
+  }
+};
+
+// ════════════════════════════════════════════════
+//  EVENT HANDLERS — called from HTML onclick
+// ════════════════════════════════════════════════
+
+// Handle sign in form
+async function handleSignIn(e) {
+  if (e) e.preventDefault();
+  const email    = document.getElementById('w-email')?.value;
+  const password = document.getElementById('w-pass')?.value;
+  if (!email || !password) return UI.toast('Please enter email and password', 'error');
+
+  const btn = document.getElementById('w-sibtn');
+  if (btn) { btn.textContent = 'Signing in...'; btn.disabled = true; }
+
+  try {
+    const res = await Auth.login(email, password);
+    UI.toast(`Welcome back, ${res.user.name}!`, 'success');
+    setTimeout(() => showPage('feed'), 800);
+    updateNavForUser(res.user);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  } finally {
+    if (btn) { btn.textContent = 'Sign In'; btn.disabled = false; }
+  }
+}
+
+// Handle register form
+async function handleRegister(e) {
+  if (e) e.preventDefault();
+  const name     = document.getElementById('w-rname')?.value;
+  const email    = document.getElementById('w-remail')?.value;
+  const password = document.getElementById('w-rpass')?.value;
+  const role     = document.querySelector('.role-opt.on')?.dataset?.role || 'jobseeker';
+
+  if (!name || !email || !password) return UI.toast('Please fill all fields', 'error');
+  if (password.length < 6) return UI.toast('Password must be at least 6 characters', 'error');
+
+  const btn = document.getElementById('w-regbtn');
+  if (btn) { btn.textContent = 'Creating account...'; btn.disabled = true; }
+
+  try {
+    const res = await Auth.register(name, email, password, role);
+    UI.toast(`Welcome to JobSouqKSA, ${res.user.name}!`, 'success');
+    setTimeout(() => showPage('feed'), 800);
+    updateNavForUser(res.user);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  } finally {
+    if (btn) { btn.textContent = 'Create Account'; btn.disabled = false; }
+  }
+}
+
+// Handle Google login
+async function handleGoogleLogin(googleToken) {
+  try {
+    const role = document.querySelector('.role-opt.on')?.dataset?.role || 'jobseeker';
+    const res  = await Auth.googleLogin(googleToken, role);
+    UI.toast(`Welcome, ${res.user.name}!`);
+    updateNavForUser(res.user);
+    showPage('feed');
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// Handle Apply button
+async function handleApply(jobId, btn) {
+  if (!Auth.isLoggedIn()) {
+    UI.toast('Please sign in to apply', 'info');
+    return showPage('login');
+  }
+  if (btn?.classList.contains('applied')) return UI.toast('Already applied!', 'info');
+
+  // Simple apply (no cover letter modal for now)
+  try {
+    btn.textContent = 'Applying...';
+    btn.disabled    = true;
+    await Applications.apply(jobId, '');
+    btn.textContent = '✓ Applied';
+    btn.style.background = '#15803d';
+    btn.classList.add('applied');
+    UI.toast('Application submitted successfully!', 'success');
+  } catch (err) {
+    UI.toast(err.message, 'error');
+    btn.textContent = 'Apply Now';
+    btn.disabled    = false;
+  }
+}
+
+// Handle Save Job
+async function handleSaveJob(jobId, btn) {
+  if (!Auth.isLoggedIn()) {
+    UI.toast('Please sign in to save jobs', 'info');
+    return showPage('login');
+  }
+  try {
+    const res = await Jobs.toggleSave(jobId);
+    btn.textContent   = res.saved ? '🔖 Saved' : 'Save';
+    btn.style.color   = res.saved ? '#0f4c81' : 'var(--muted)';
+    UI.toast(res.message);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// Handle Withdraw Application
+async function handleWithdraw(applicationId, btn) {
+  if (!confirm('Withdraw this application?')) return;
+  try {
+    await Applications.withdraw(applicationId);
+    btn.closest('.appitem')?.remove();
+    UI.toast('Application withdrawn');
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// Handle application status update (company dashboard)
+async function handleStatusUpdate(applicationId, status) {
+  try {
+    await Applications.updateStatus(applicationId, status);
+    UI.toast(`Application ${status}`, 'success');
+    // Refresh dashboard
+    const companyId = getUser()?.companyId;
+    if (companyId) loadDashboard(companyId);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// Handle Follow Company
+async function handleFollowCompany(companyId, btn) {
+  if (!Auth.isLoggedIn()) {
+    UI.toast('Please sign in to follow companies', 'info');
+    return showPage('login');
+  }
+  try {
+    const res = await Companies.toggleFollow(companyId);
+    btn.textContent  = res.following ? 'Following' : 'Follow';
+    btn.classList.toggle('fw', res.following);
+    UI.toast(res.message);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// Handle Profile Update
+async function handleProfileUpdate(formData) {
+  try {
+    const res = await Users.updateProfile(formData);
+    setUser(res.data);
+    UI.toast('Profile updated successfully!', 'success');
+    return res;
+  } catch (err) {
+    UI.toast(err.message, 'error');
+    throw err;
+  }
+}
+
+// Handle Job Search
+async function handleSearch(e) {
+  if (e) e.preventDefault();
+  const keyword    = document.querySelector('.nsearch input')?.value || '';
+  const feedEl     = document.getElementById('job-feed') || document.querySelector('.feed');
+  if (feedEl) await Feed.renderJobs(feedEl.id, { keyword });
+}
+
+// Handle forgot password
+async function handleForgotPassword(email) {
+  try {
+    await Auth.forgotPassword(email);
+    UI.toast('Reset email sent! Check your inbox.', 'success');
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// ════════════════════════════════════════════════
+//  DASHBOARD LOADER
+// ════════════════════════════════════════════════
+async function loadDashboard(companyId) {
+  try {
+    const [statsRes, jobsRes] = await Promise.all([
+      Applications.getCompanyStats(companyId),
+      Jobs.getMyJobs()
+    ]);
+
+    // Update stat cards
+    const stats = statsRes.data;
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setEl('stat-total-apps',  stats.totalApps);
+    setEl('stat-active-jobs', stats.activeJobs);
+    setEl('stat-shortlisted', stats.shortlisted);
+    setEl('stat-hired',       stats.hired);
+
+    // Render jobs table
+    const tbody = document.querySelector('.jtable tbody');
+    if (tbody && jobsRes.data) {
+      tbody.innerHTML = jobsRes.data.map(job => `
+        <tr>
+          <td style="font-weight:500">${job.title}</td>
+          <td style="color:var(--muted)">${job.location?.city}</td>
+          <td>${job.applicationCount || job.applications || 0}</td>
+          <td><span class="jstatus js-${job.status === 'active' ? 'a' : job.status === 'paused' ? 'p' : 'c'}">
+            ${job.status.charAt(0).toUpperCase() + job.status.slice(1)}
+          </span></td>
+          <td>
+            <button class="act-btn" onclick="loadJobApplications('${job._id}')">View Apps</button>
+            <button class="act-btn" onclick="toggleJobStatus('${job._id}', '${job.status}')" style="margin-left:4px">
+              ${job.status === 'active' ? 'Pause' : 'Activate'}
+            </button>
+          </td>
+        </tr>`).join('');
+    }
+  } catch (err) {
+    UI.toast('Failed to load dashboard: ' + err.message, 'error');
+  }
+}
+
+async function loadJobApplications(jobId) {
+  try {
+    const res = await Applications.getForJob(jobId, { limit: 20 });
+    const container = document.querySelector('.applist');
+    if (!container) return;
+    if (!res.data?.length) {
+      container.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:10px">No applications yet</p>';
+      return;
+    }
+    container.innerHTML = res.data.map(app => `
+      <div class="appitem">
+        <div class="appava" style="background:#0f4c81">${UI.initials(app.applicant?.name)}</div>
+        <div class="appinfo">
+          <h5>${app.applicant?.name || 'Applicant'}</h5>
+          <p>${app.applicant?.headline || ''} · ${UI.timeAgo(app.createdAt)}</p>
+        </div>
+        <div class="app-acts">
+          <button class="abt abt-y" onclick="handleStatusUpdate('${app._id}','shortlisted')">Shortlist</button>
+          <button class="abt abt-n" onclick="handleStatusUpdate('${app._id}','rejected')">Reject</button>
+        </div>
+      </div>`).join('');
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+async function toggleJobStatus(jobId, currentStatus) {
+  const newStatus = currentStatus === 'active' ? 'paused' : 'active';
+  try {
+    await Jobs.update(jobId, { status: newStatus });
+    UI.toast(`Job ${newStatus}`, 'success');
+    const user = getUser();
+    if (user?.companyId) loadDashboard(user.companyId);
+  } catch (err) {
+    UI.toast(err.message, 'error');
+  }
+}
+
+// ════════════════════════════════════════════════
+//  PROFILE LOADER
+// ════════════════════════════════════════════════
+async function loadProfile(userId) {
+  try {
+    const res = userId ? await Users.getById(userId) : await Auth.getMe();
+    const user = res.user || res.data;
+    if (!user) return;
+
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '—'; };
+    setEl('w-pname',  user.name);
+    setEl('w-prole',  user.headline);
+    setEl('w-ploc',   `${user.location?.city || ''}, ${user.location?.country || 'Saudi Arabia'}`);
+    setEl('w-pconn',  user.connections?.length || 0);
+
+    // Render skills
+    const skillsEl = document.querySelector('.sec .skill-pill')?.parentElement;
+    if (skillsEl && user.skills?.length) {
+      skillsEl.innerHTML = user.skills
+        .map(s => `<span class="skill-pill">${s.name}</span>`).join('');
+    }
+
+    // Render experience
+    const expEl = document.querySelectorAll('.exp-item');
+    if (expEl.length && user.experience?.length) {
+      user.experience.slice(0, 3).forEach((exp, i) => {
+        if (expEl[i]) {
+          expEl[i].querySelector('h5').textContent = `${exp.title} — ${exp.company}`;
+          expEl[i].querySelector('p').textContent =
+            `${new Date(exp.startDate).getFullYear()} – ${exp.current ? 'Present' : new Date(exp.endDate).getFullYear()} · ${exp.location || ''}`;
+        }
+      });
+    }
+  } catch (err) {
+    console.error('Profile load error:', err);
+  }
+}
+
+// ════════════════════════════════════════════════
+//  NAV UPDATE ON LOGIN
+// ════════════════════════════════════════════════
+function updateNavForUser(user) {
+  if (!user) return;
+  const ava = document.querySelector('.nava');
+  if (ava) ava.textContent = UI.initials(user.name);
+
+  // Update sidebar profile
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setEl('w-uname', user.name);
+  setEl('w-urole', `${user.headline || user.role} · ${user.location?.city || 'Saudi Arabia'}`);
+}
+
+// ════════════════════════════════════════════════
+//  APP INIT — runs on page load
+// ════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+  // Restore session
+  if (Auth.isLoggedIn()) {
+    try {
+      const res = await Auth.getMe();
+      setUser(res.user);
+      updateNavForUser(res.user);
+    } catch {
+      clearToken(); clearUser();
+    }
+  }
+
+  // Load feed jobs
+  const feedContainer = document.querySelector('.feed');
+  if (feedContainer && !feedContainer.id) feedContainer.id = 'main-feed';
+  if (document.getElementById('p-feed')?.classList.contains('on')) {
+    await Feed.renderJobs('main-feed');
+  }
+
+  // Connect socket if logged in
+  if (Auth.isLoggedIn()) {
+    SocketService.connect();
+    SocketService.onMessage(msg => {
+      UI.toast(`New message from ${msg.sender?.name || 'Someone'}`, 'info');
+    });
+  }
+
+  // Wire up sign in form
+  const siForm = document.getElementById('si-form');
+  if (siForm) {
+    const sibtn = document.getElementById('w-sibtn');
+    if (sibtn) sibtn.onclick = handleSignIn;
+  }
+
+  // Wire up register form
+  const regbtn = document.getElementById('w-regbtn');
+  if (regbtn) regbtn.onclick = handleRegister;
+
+  // Wire up search
+  const searchInput = document.querySelector('.nsearch input');
+  if (searchInput) {
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSearch(e); });
+  }
+
+  // Google Sign-In button (if google SDK loaded)
+  if (typeof google !== 'undefined') {
+    google.accounts.id.initialize({
+      client_id: 'YOUR_GOOGLE_CLIENT_ID',
+      callback: (response) => handleGoogleLogin(response.credential)
+    });
+    const googleBtns = document.querySelectorAll('#w-google, #w-google-app');
+    googleBtns.forEach(btn => {
+      btn.onclick = () => google.accounts.id.prompt();
+    });
+  }
+});
+
+// Expose to global scope for HTML onclick usage
+window.Auth           = Auth;
+window.Jobs           = Jobs;
+window.Applications   = Applications;
+window.Users          = Users;
+window.Companies      = Companies;
+window.Messages       = Messages;
+window.Notifications  = Notifications;
+window.UI             = UI;
+window.Feed           = Feed;
+window.SocketService  = SocketService;
+window.handleApply    = handleApply;
+window.handleSaveJob  = handleSaveJob;
+window.handleWithdraw = handleWithdraw;
+window.handleStatusUpdate   = handleStatusUpdate;
+window.handleFollowCompany  = handleFollowCompany;
+window.handleProfileUpdate  = handleProfileUpdate;
+window.handleSearch         = handleSearch;
+window.handleForgotPassword = handleForgotPassword;
+window.handleSignIn         = handleSignIn;
+window.handleRegister       = handleRegister;
+window.loadDashboard        = loadDashboard;
+window.loadJobApplications  = loadJobApplications;
+window.toggleJobStatus      = toggleJobStatus;
+window.loadProfile          = loadProfile;
+</script>
+</body>
+</html>

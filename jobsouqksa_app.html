@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobSouqKSA — Mobile App Mockup</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#0f4c81;--pl:#e8f1fb;--acc:#c47f17;--bg:#f0f4f8;--card:#fff;--text:#111827;--muted:#6b7280;--bdr:rgba(0,0,0,0.09);--grn:#15803d;--red:#b91c1c}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#dde3ea;min-height:100vh}
+.outer{padding:20px 12px 36px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;max-width:920px;margin:0 auto 20px;flex-wrap:wrap;gap:10px}
+.toolbar-left h1{font-size:20px;font-weight:900;color:var(--text);letter-spacing:-.5px;font-style:italic}
+.toolbar-left h1 span{color:var(--acc)}
+.toolbar-left p{font-size:11px;color:var(--muted);margin-top:3px;font-style:normal;font-weight:400}
+.lswitch{display:flex;background:#fff;border:0.5px solid var(--bdr);border-radius:24px;padding:3px;gap:2px}
+.ls{padding:6px 18px;border-radius:20px;font-size:12px;cursor:pointer;color:var(--muted);transition:all .2s;font-weight:500}
+.ls.on{background:var(--p);color:#fff}
+.row{display:flex;gap:16px;max-width:920px;margin:0 auto;justify-content:center;flex-wrap:wrap}
+
+/* PHONE */
+.phone{flex:none;display:flex;flex-direction:column;align-items:center;gap:9px}
+.plabel{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;background:rgba(255,255,255,0.5);padding:3px 10px;border-radius:20px}
+.frame{width:200px;background:#1c1c1e;border-radius:38px;padding:4px;box-shadow:0 24px 64px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06)}
+.inner{background:var(--card);border-radius:35px;overflow:hidden;min-height:420px;display:flex;flex-direction:column;position:relative}
+.notch{width:60px;height:18px;background:#1c1c1e;border-radius:0 0 12px 12px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:5}
+.sbar{background:var(--p);padding:16px 14px 5px;display:flex;justify-content:space-between;align-items:center}
+.sbar-t{font-size:10px;font-weight:700;color:#fff}
+.sbar-r{font-size:9px;color:rgba(255,255,255,.6)}
+
+/* NAV */
+.snav{background:var(--p);padding:6px 10px;display:flex;align-items:center;gap:7px}
+.snav svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.snav-title{font-size:12px;font-weight:700;color:#fff;flex:1}
+.logo-t{font-size:14px;font-weight:900;color:#fff;font-style:italic;letter-spacing:-.5px}
+.logo-t span{color:#fbbf24}
+.ssearch{background:rgba(255,255,255,0.13);border-radius:18px;margin:0 8px 7px;padding:5px 10px;display:flex;align-items:center;gap:5px}
+.ssearch input{background:none;border:none;outline:none;color:#fff;font-size:10px;width:100%}
+.ssearch input::placeholder{color:rgba(255,255,255,.5)}
+.ssearch svg{width:11px;height:11px;fill:none;stroke:rgba(255,255,255,.65);stroke-width:2;stroke-linecap:round;flex:none}
+
+/* CONTENT */
+.scontent{flex:1;overflow:hidden;padding:7px;display:flex;flex-direction:column;gap:6px;background:var(--bg)}
+.scard{background:var(--card);border-radius:10px;border:.5px solid var(--bdr);padding:9px}
+.srow{display:flex;align-items:center;gap:6px}
+.ava{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;flex:none}
+.avasq{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;color:#fff;flex:none}
+.sm{font-size:9px;color:var(--muted)}
+.badge{font-size:8px;padding:2px 6px;border-radius:20px;font-weight:600}
+.badge.bl{background:var(--pl);color:#0c447c}
+.badge.gr{background:#f0fdf4;color:#166534}
+.badge.am{background:#fef9ee;color:#854f0b}
+.jbox{background:var(--bg);border-radius:7px;padding:7px;border:.5px solid var(--bdr);margin-top:5px}
+.jbox h5{font-size:10px;font-weight:600;color:var(--p)}
+.jbox p{font-size:9px;color:var(--muted);margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}
+.tag{display:inline-block;background:var(--pl);color:#0c447c;font-size:8px;padding:2px 5px;border-radius:20px}
+.tag.g{background:#f0fdf4;color:#166534}
+.sbtn{background:var(--p);color:#fff;border:none;border-radius:6px;padding:6px;font-size:10px;font-weight:600;cursor:pointer;width:100%;margin-top:5px;transition:opacity .15s}
+.sbtn:hover{opacity:.85}
+.sbtn-o{background:none;border:.5px solid var(--p);color:var(--p);border-radius:6px;padding:5px;font-size:10px;cursor:pointer;flex:1}
+
+/* BOTTOM NAV */
+.botnav{background:var(--card);border-top:.5px solid var(--bdr);padding:7px 4px 10px;display:flex;justify-content:space-around}
+.bn{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:2px 5px;position:relative}
+.bn svg{width:17px;height:17px;fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bn span{font-size:8px;color:var(--muted)}
+.bn.on svg{stroke:var(--p)}
+.bn.on span{color:var(--p);font-weight:700}
+.ndot{width:5px;height:5px;background:#ef4444;border-radius:50%;position:absolute;top:0;right:1px}
+
+/* PROFILE */
+.pbanner-m{height:50px;background:var(--p)}
+.pava-m{width:44px;height:44px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;margin:-22px 0 0 10px;position:relative}
+.skill-t{display:inline-block;background:var(--pl);color:#0c447c;font-size:8px;padding:2px 5px;border-radius:20px;margin:1px 2px 1px 0}
+
+/* LOGIN */
+.login-sc{background:var(--p);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:12px}
+.login-bx{width:100%;background:#fff;border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:6px}
+.role-row{display:flex;background:var(--bg);border-radius:6px;padding:2px;gap:2px;margin-bottom:2px}
+.role-opt{flex:1;text-align:center;border-radius:5px;padding:5px;font-size:9px;cursor:pointer;font-weight:500;transition:all .2s;color:var(--muted)}
+.role-opt.on{background:var(--p);color:#fff}
+.l-inp{width:100%;background:var(--bg);border:.5px solid var(--bdr);border-radius:6px;padding:7px 9px;font-size:10px;color:var(--text);outline:none;font-family:inherit}
+.or-row{display:flex;align-items:center;gap:5px;font-size:8px;color:var(--muted)}
+.or-row::before,.or-row::after{content:'';flex:1;height:.5px;background:var(--bdr)}
+
+/* DASHBOARD SCREEN */
+.dash-item{display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:.5px solid var(--bdr)}
+.dash-item:last-child{border-bottom:none}
+.dash-dot{width:7px;height:7px;border-radius:50%;flex:none}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.dash-stat{background:var(--bg);border-radius:7px;padding:7px;text-align:center}
+.dash-stat strong{display:block;font-size:14px;font-weight:700;color:var(--p)}
+.dash-stat span{font-size:8px;color:var(--muted)}
+
+/* FILTER CHIPS */
+.chips{display:flex;gap:3px;padding:5px 7px;background:var(--card);border-bottom:.5px solid var(--bdr);overflow:hidden}
+.chip{border-radius:20px;padding:3px 8px;font-size:9px;cursor:pointer;font-weight:500;white-space:nowrap}
+.chip.on{background:var(--p);color:#fff}
+.chip.off{background:var(--bg);border:.5px solid var(--bdr);color:var(--muted)}
+
+/* TOAST */
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(60px);background:#111827;color:#fff;padding:8px 20px;border-radius:22px;font-size:12px;opacity:0;transition:all .3s;z-index:9999;white-space:nowrap;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="outer">
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <h1>Job<span>Souq</span>KSA</h1>
+      <p>Mobile App Mockup — iOS & Android · 5 Screens</p>
+    </div>
+    <div class="lswitch">
+      <div class="ls on" onclick="setLang('en',this)">English</div>
+      <div class="ls" onclick="setLang('ar',this)">العربية</div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- ── SCREEN 1: LOGIN ── -->
+    <div class="phone">
+      <div class="frame"><div class="inner" id="sc1">
+        <div class="notch"></div>
+        <div class="sbar"><span class="sbar-t">9:41</span><span class="sbar-r">●●● WiFi</span></div>
+        <div class="login-sc">
+          <div style="text-align:center">
+            <div style="font-size:22px;font-weight:900;font-style:italic;letter-spacing:-.5px;color:#fff">Job<span style="color:#fbbf24">Souq</span>KSA</div>
+            <div id="a-sub" style="font-size:9px;color:rgba(255,255,255,.55);margin-top:4px">Saudi Arabia's #1 Job Network</div>
+          </div>
+          <div class="login-bx">
+            <div class="role-row">
+              <div class="role-opt on" id="a-seek" onclick="selRole('seek')"><span id="a-seekl">Job Seeker</span></div>
+              <div class="role-opt" id="a-comp" onclick="selRole('comp')"><span id="a-compl">Company</span></div>
+            </div>
+            <input class="l-inp" id="a-email" type="email" placeholder="Email address">
+            <input class="l-inp" type="password" id="a-pass" placeholder="Password">
+            <button class="sbtn" onclick="showT('Welcome to JobSouqKSA!')"><span id="a-sibtn">Sign In</span></button>
+            <div class="or-row"><span id="a-or">or</span></div>
+            <button style="background:none;border:.5px solid var(--bdr);border-radius:6px;padding:6px;font-size:9px;color:var(--muted);cursor:pointer;width:100%;font-family:inherit" onclick="showT('Google login...')"><span id="a-google">Continue with Google</span></button>
+            <div style="text-align:center;font-size:8px;color:var(--muted)" id="a-reg">No account? <span style="color:var(--p);cursor:pointer">Register</span></div>
+          </div>
+        </div>
+        <div style="background:var(--p);padding:7px;text-align:center"><span id="a-terms" style="font-size:8px;color:rgba(255,255,255,.4)">Terms & Privacy Policy</span></div>
+      </div></div>
+      <div class="plabel" id="lbl1">Sign In</div>
+    </div>
+
+    <!-- ── SCREEN 2: HOME FEED ── -->
+    <div class="phone">
+      <div class="frame"><div class="inner" id="sc2">
+        <div class="notch"></div>
+        <div class="sbar"><span class="sbar-t">9:41</span><span class="sbar-r">●●●</span></div>
+        <div class="snav">
+          <div class="snav-title logo-t">Job<span>Souq</span>KSA</div>
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ssearch">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="a-srch" placeholder="Search jobs, companies...">
+        </div>
+        <div class="scontent">
+          <div class="scard">
+            <div class="srow">
+              <div class="avasq" style="background:#0f4c81">SA</div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:600" id="a-co1">Saudi Aramco</div><div class="sm" id="a-ago1">2 hours ago</div></div>
+              <div class="badge bl" id="a-badge1">Company</div>
+            </div>
+            <div class="jbox">
+              <h5 id="a-job1">Senior Software Engineer</h5>
+              <p id="a-loc1">Dhahran · Full Time · SAR 25k–35k</p>
+              <div class="tags"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">5+ yrs</span></div>
+            </div>
+            <button class="sbtn" onclick="showT('Application submitted!')" id="a-apply1">Apply Now</button>
+            <div class="srow" style="margin-top:6px;gap:8px">
+              <span onclick="doLike(this)" style="font-size:9px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:3px">
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg>
+                <span class="lc">247</span>
+              </span>
+              <span id="a-cmt1" style="font-size:9px;color:var(--muted)">43 comments</span>
+              <span id="a-save1" onclick="showT('Saved!')" style="font-size:9px;color:var(--muted);cursor:pointer;margin-left:auto">Save</span>
+            </div>
+          </div>
+          <div class="scard">
+            <div class="srow">
+              <div class="ava" style="background:#c47f17">FH</div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:600">Fatima Hassan</div><div class="sm">HR Manager · Riyadh</div></div>
+              <div class="badge gr" id="a-badge2">Hiring</div>
+            </div>
+            <p style="font-size:10px;line-height:1.5;margin-top:6px;color:var(--text)" id="a-post2">Urgent! Looking for Digital Marketing Manager, Content Writer & Sales Executive. DM to apply!</p>
+            <div class="srow" style="margin-top:6px">
+              <span onclick="doLike(this)" style="font-size:9px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:3px">
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg>
+                <span class="lc">89</span>
+              </span>
+              <span style="font-size:9px;color:var(--p);cursor:pointer;font-weight:600;margin-left:auto" id="a-conn2" onclick="showT('Connect request sent!')">Connect</span>
+            </div>
+          </div>
+        </div>
+        <div class="botnav">
+          <div class="bn on"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span id="a-bn1a">Home</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span id="a-bn1b">Jobs</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span id="a-bn1c">Messages</span><div class="ndot"></div></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="a-bn1d">Profile</span></div>
+        </div>
+      </div></div>
+      <div class="plabel" id="lbl2">Home Feed</div>
+    </div>
+
+    <!-- ── SCREEN 3: JOB LISTINGS ── -->
+    <div class="phone">
+      <div class="frame"><div class="inner" id="sc3">
+        <div class="notch"></div>
+        <div class="sbar"><span class="sbar-t">9:41</span><span class="sbar-r">●●●</span></div>
+        <div class="snav">
+          <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+          <div class="snav-title" id="a-jstitle">Browse Jobs</div>
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/></svg>
+        </div>
+        <div style="background:var(--p);padding:0 8px 7px">
+          <div class="ssearch" style="margin:0">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="a-jsrch" placeholder="Job title, skill...">
+          </div>
+        </div>
+        <div class="chips">
+          <div class="chip on">All</div>
+          <div class="chip off" id="a-ftech">Tech</div>
+          <div class="chip off" id="a-fhr">HR</div>
+          <div class="chip off" id="a-ffin">Finance</div>
+          <div class="chip off" id="a-fmkt">Marketing</div>
+        </div>
+        <div class="scontent" style="gap:5px">
+          <div class="scard" style="padding:9px">
+            <div class="srow"><div class="avasq" style="background:#0f4c81">SA</div><div style="flex:1"><div style="font-size:10px;font-weight:600" id="a-j1">Sr. Software Engineer</div><div class="sm">Saudi Aramco · Dhahran</div></div><span style="font-size:12px;cursor:pointer;color:var(--muted)" onclick="showT('Saved!')">♡</span></div>
+            <div class="tags" style="margin-top:4px"><span class="tag">Full Time</span><span class="tag g">SAR 35k</span><span class="tag">5+ yrs</span></div>
+            <div class="srow" style="margin-top:6px;gap:4px"><button class="sbtn-o" onclick="showT('Details...')" id="a-jd1">Details</button><button class="sbtn" style="flex:1;margin:0" onclick="showT('Applied!')" id="a-ja1">Apply</button></div>
+          </div>
+          <div class="scard" style="padding:9px">
+            <div class="srow"><div class="avasq" style="background:#b91c1c">ST</div><div style="flex:1"><div style="font-size:10px;font-weight:600" id="a-j2">Data Scientist</div><div class="sm">STC Group · Riyadh</div></div><span style="font-size:12px;cursor:pointer;color:var(--muted)" onclick="showT('Saved!')">♡</span></div>
+            <div class="tags" style="margin-top:4px"><span class="tag">Full Time</span><span class="tag g">SAR 28k</span><span class="tag">3+ yrs</span></div>
+            <div class="srow" style="margin-top:6px;gap:4px"><button class="sbtn-o" onclick="showT('Details...')" id="a-jd2">Details</button><button class="sbtn" style="flex:1;margin:0" onclick="showT('Applied!')" id="a-ja2">Apply</button></div>
+          </div>
+          <div class="scard" style="padding:9px">
+            <div class="srow"><div class="avasq" style="background:#15803d">SB</div><div style="flex:1"><div style="font-size:10px;font-weight:600" id="a-j3">UX Designer</div><div class="sm">Sabic · Remote</div></div><span style="font-size:12px;cursor:pointer;color:var(--muted)" onclick="showT('Saved!')">♡</span></div>
+            <div class="tags" style="margin-top:4px"><span class="tag">Remote</span><span class="tag g">SAR 20k</span><span class="tag">2+ yrs</span></div>
+            <div class="srow" style="margin-top:6px;gap:4px"><button class="sbtn-o" onclick="showT('Details...')" id="a-jd3">Details</button><button class="sbtn" style="flex:1;margin:0" onclick="showT('Applied!')" id="a-ja3">Apply</button></div>
+          </div>
+        </div>
+        <div class="botnav">
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span id="a-bn2a">Home</span></div>
+          <div class="bn on"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span id="a-bn2b">Jobs</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span id="a-bn2c">Messages</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="a-bn2d">Profile</span></div>
+        </div>
+      </div></div>
+      <div class="plabel" id="lbl3">Job Listings</div>
+    </div>
+
+    <!-- ── SCREEN 4: PROFILE ── -->
+    <div class="phone">
+      <div class="frame"><div class="inner" id="sc4">
+        <div class="notch"></div>
+        <div class="sbar"><span class="sbar-t">9:41</span><span class="sbar-r">●●●</span></div>
+        <div class="snav">
+          <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+          <div class="snav-title" id="a-ptitle">My Profile</div>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div class="scontent" style="padding:0;gap:0;background:var(--bg)">
+          <div style="background:var(--card)">
+            <div class="pbanner-m"></div>
+            <div class="pava-m" style="background:var(--acc)">AM</div>
+            <div style="padding:5px 10px 10px;margin-top:4px">
+              <div style="font-size:13px;font-weight:700" id="a-pname">Ahmed Malik</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:1px" id="a-prole">Senior Software Engineer</div>
+              <div style="font-size:9px;color:var(--muted);margin-top:1px" id="a-ploc">Riyadh, Saudi Arabia</div>
+              <div style="display:flex;gap:4px;margin-top:7px">
+                <button class="sbtn" style="flex:1;margin:0;font-size:9px" onclick="showT('Edit mode!')" id="a-edit">Edit Profile</button>
+                <button class="sbtn-o" style="padding:5px 10px;font-size:9px" onclick="showT('CV downloaded!')" id="a-cv">CV</button>
+              </div>
+              <div style="display:flex;justify-content:space-around;margin-top:9px;padding-top:8px;border-top:.5px solid var(--bdr)">
+                <div style="text-align:center"><strong style="font-size:13px;color:var(--p)">142</strong><div style="font-size:8px;color:var(--muted)" id="a-pc">Connections</div></div>
+                <div style="text-align:center"><strong style="font-size:13px;color:var(--p)">38</strong><div style="font-size:8px;color:var(--muted)" id="a-pa">Applied</div></div>
+                <div style="text-align:center"><strong style="font-size:13px;color:var(--p)">4</strong><div style="font-size:8px;color:var(--muted)" id="a-po">Offers</div></div>
+              </div>
+            </div>
+          </div>
+          <div style="height:5px"></div>
+          <div style="background:var(--card);padding:9px">
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px" id="a-sk">Skills</div>
+            <div><span class="skill-t">React.js</span><span class="skill-t">Node.js</span><span class="skill-t">Python</span><span class="skill-t">AWS</span><span class="skill-t">TypeScript</span><span class="skill-t">MongoDB</span></div>
+          </div>
+          <div style="height:5px"></div>
+          <div style="background:var(--card);padding:9px">
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="a-exp">Experience</div>
+            <div style="margin-bottom:5px"><div style="font-size:10px;font-weight:600" id="a-e1">Sr. Developer — STC Group</div><div style="font-size:9px;color:var(--muted)">2022 – Present · Riyadh</div></div>
+            <div><div style="font-size:10px;font-weight:600" id="a-e2">Full Stack Dev — Mawdoo3</div><div style="font-size:9px;color:var(--muted)">2019 – 2021 · Remote</div></div>
+          </div>
+        </div>
+        <div class="botnav">
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span id="a-bn3a">Home</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span id="a-bn3b">Jobs</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span id="a-bn3c">Messages</span></div>
+          <div class="bn on"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="a-bn3d">Profile</span></div>
+        </div>
+      </div></div>
+      <div class="plabel" id="lbl4">Profile</div>
+    </div>
+
+    <!-- ── SCREEN 5: COMPANY DASHBOARD ── -->
+    <div class="phone">
+      <div class="frame"><div class="inner" id="sc5">
+        <div class="notch"></div>
+        <div class="sbar"><span class="sbar-t">9:41</span><span class="sbar-r">●●●</span></div>
+        <div class="snav">
+          <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+          <div class="snav-title" id="a-dbtitle">Dashboard</div>
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/></svg>
+        </div>
+        <div class="scontent" style="gap:6px">
+          <div class="scard" style="padding:8px">
+            <div class="srow" style="margin-bottom:7px">
+              <div class="avasq" style="background:#0f4c81;border-radius:8px;width:28px;height:28px">SA</div>
+              <div><div style="font-size:10px;font-weight:600" id="a-dbco">Saudi Aramco</div><div class="sm" id="a-dbsub">Company Admin</div></div>
+              <button style="margin-left:auto;background:var(--p);color:#fff;border:none;border-radius:5px;padding:4px 8px;font-size:8px;cursor:pointer;font-weight:600" onclick="showT('New job posted!')" id="a-newjob">+ Post Job</button>
+            </div>
+            <div class="dash-grid">
+              <div class="dash-stat"><strong>1,284</strong><span id="a-ds1">Applications</span></div>
+              <div class="dash-stat"><strong style="color:var(--acc)">9</strong><span id="a-ds2">Active Jobs</span></div>
+              <div class="dash-stat"><strong style="color:var(--grn)">4,730</strong><span id="a-ds3">Profile Views</span></div>
+              <div class="dash-stat"><strong>14</strong><span id="a-ds4">Hired</span></div>
+            </div>
+          </div>
+          <div class="scard" style="padding:8px">
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="a-recentapp">Recent Applications</div>
+            <div class="dash-item">
+              <div class="ava" style="background:#0f4c81;width:26px;height:26px;font-size:9px">AM</div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:600">Ahmed Malik</div><div class="sm">React, Node.js · 5 yrs</div></div>
+              <div style="display:flex;gap:3px">
+                <button style="background:var(--grn);color:#fff;border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer;font-weight:600" onclick="showT('Ahmed accepted!')" id="a-acc1">Accept</button>
+                <button style="background:#fee2e2;color:var(--red);border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer" onclick="showT('Declined')" id="a-dec1">Decline</button>
+              </div>
+            </div>
+            <div class="dash-item">
+              <div class="ava" style="background:#15803d;width:26px;height:26px;font-size:9px">SR</div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:600">Sara Rahman</div><div class="sm">Full Stack · 7 yrs</div></div>
+              <div style="display:flex;gap:3px">
+                <button style="background:var(--grn);color:#fff;border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer;font-weight:600" onclick="showT('Sara accepted!')" id="a-acc2">Accept</button>
+                <button style="background:#fee2e2;color:var(--red);border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer" onclick="showT('Declined')" id="a-dec2">Decline</button>
+              </div>
+            </div>
+            <div class="dash-item">
+              <div class="ava" style="background:#c47f17;width:26px;height:26px;font-size:9px">KA</div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:600">Kareem Al-Amin</div><div class="sm">Python, AWS · 3 yrs</div></div>
+              <div style="display:flex;gap:3px">
+                <button style="background:var(--grn);color:#fff;border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer;font-weight:600" onclick="showT('Kareem accepted!')" id="a-acc3">Accept</button>
+                <button style="background:#fee2e2;color:var(--red);border:none;border-radius:4px;padding:3px 6px;font-size:8px;cursor:pointer" onclick="showT('Declined')" id="a-dec3">Decline</button>
+              </div>
+            </div>
+          </div>
+          <div class="scard" style="padding:8px">
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px" id="a-activejobs">Active Jobs</div>
+            <div class="dash-item">
+              <div class="dash-dot" style="background:var(--grn)"></div>
+              <div style="flex:1"><div style="font-size:9px;font-weight:600" id="a-aj1">Sr. Software Engineer</div><div class="sm">312 applicants</div></div>
+              <span style="font-size:8px;background:#f0fdf4;color:#166534;padding:2px 5px;border-radius:20px" id="a-ast1">Active</span>
+            </div>
+            <div class="dash-item">
+              <div class="dash-dot" style="background:var(--grn)"></div>
+              <div style="flex:1"><div style="font-size:9px;font-weight:600" id="a-aj2">Data Scientist</div><div class="sm">187 applicants</div></div>
+              <span style="font-size:8px;background:#f0fdf4;color:#166534;padding:2px 5px;border-radius:20px" id="a-ast2">Active</span>
+            </div>
+            <div class="dash-item">
+              <div class="dash-dot" style="background:var(--acc)"></div>
+              <div style="flex:1"><div style="font-size:9px;font-weight:600" id="a-aj3">DevOps Engineer</div><div class="sm">211 applicants</div></div>
+              <span style="font-size:8px;background:#fef9ee;color:#854f0b;padding:2px 5px;border-radius:20px" id="a-ast3">Closing</span>
+            </div>
+          </div>
+        </div>
+        <div class="botnav">
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span id="a-bn4a">Home</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span id="a-bn4b">Jobs</span></div>
+          <div class="bn on"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span id="a-bn4c">Dashboard</span></div>
+          <div class="bn"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="a-bn4d">Profile</span></div>
+        </div>
+      </div></div>
+      <div class="plabel" id="lbl5">Dashboard</div>
+    </div>
+
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+var L='en';
+var TX={
+  en:{lbl1:'Sign In',lbl2:'Home Feed',lbl3:'Job Listings',lbl4:'Profile',lbl5:'Dashboard',
+    'a-sub':"Saudi Arabia's #1 Job Network",'a-seekl':'Job Seeker','a-compl':'Company',
+    'a-sibtn':'Sign In','a-google':'Continue with Google','a-reg':'No account? Register','a-or':'or','a-terms':'Terms & Privacy Policy',
+    'a-email':'Email address','a-pass':'Password',
+    'a-srch':'Search jobs, companies...','a-co1':'Saudi Aramco','a-ago1':'2 hours ago','a-badge1':'Company',
+    'a-job1':'Senior Software Engineer','a-loc1':'Dhahran · Full Time · SAR 25k–35k',
+    'a-apply1':'Apply Now','a-cmt1':'43 comments','a-save1':'Save','a-badge2':'Hiring','a-conn2':'Connect',
+    'a-post2':'Urgent! Looking for Digital Marketing Manager, Content Writer & Sales Executive. DM to apply!',
+    'a-bn1a':'Home','a-bn1b':'Jobs','a-bn1c':'Messages','a-bn1d':'Profile',
+    'a-jstitle':'Browse Jobs','a-jsrch':'Job title, skill...','a-ftech':'Tech','a-fhr':'HR','a-ffin':'Finance','a-fmkt':'Marketing',
+    'a-j1':'Sr. Software Engineer','a-j2':'Data Scientist','a-j3':'UX Designer',
+    'a-jd1':'Details','a-jd2':'Details','a-jd3':'Details','a-ja1':'Apply','a-ja2':'Apply','a-ja3':'Apply',
+    'a-bn2a':'Home','a-bn2b':'Jobs','a-bn2c':'Messages','a-bn2d':'Profile',
+    'a-ptitle':'My Profile','a-pname':'Ahmed Malik','a-prole':'Senior Software Engineer','a-ploc':'Riyadh, Saudi Arabia',
+    'a-edit':'Edit Profile','a-cv':'CV','a-pc':'Connections','a-pa':'Applied','a-po':'Offers',
+    'a-sk':'Skills','a-exp':'Experience','a-e1':'Sr. Developer — STC Group','a-e2':'Full Stack Dev — Mawdoo3',
+    'a-bn3a':'Home','a-bn3b':'Jobs','a-bn3c':'Messages','a-bn3d':'Profile',
+    'a-dbtitle':'Dashboard','a-dbco':'Saudi Aramco','a-dbsub':'Company Admin','a-newjob':'+ Post Job',
+    'a-ds1':'Applications','a-ds2':'Active Jobs','a-ds3':'Profile Views','a-ds4':'Hired',
+    'a-recentapp':'Recent Applications','a-acc1':'Accept','a-dec1':'Decline','a-acc2':'Accept','a-dec2':'Decline','a-acc3':'Accept','a-dec3':'Decline',
+    'a-activejobs':'Active Jobs','a-aj1':'Sr. Software Engineer','a-aj2':'Data Scientist','a-aj3':'DevOps Engineer',
+    'a-ast1':'Active','a-ast2':'Active','a-ast3':'Closing',
+    'a-bn4a':'Home','a-bn4b':'Jobs','a-bn4c':'Dashboard','a-bn4d':'Profile'},
+  ar:{lbl1:'تسجيل الدخول',lbl2:'الرئيسية',lbl3:'الوظائف',lbl4:'الملف الشخصي',lbl5:'لوحة التحكم',
+    'a-sub':'شبكة العمل الأولى في المملكة','a-seekl':'باحث عن عمل','a-compl':'شركة',
+    'a-sibtn':'تسجيل الدخول','a-google':'المتابعة عبر Google','a-reg':'ليس لديك حساب؟ سجّل','a-or':'أو','a-terms':'الشروط والخصوصية',
+    'a-email':'البريد الإلكتروني','a-pass':'كلمة المرور',
+    'a-srch':'ابحث عن وظائف وشركات...','a-co1':'أرامكو السعودية','a-ago1':'منذ ساعتين','a-badge1':'شركة',
+    'a-job1':'مهندس برمجيات أول','a-loc1':'الظهران · دوام كامل · ٢٥–٣٥ ألف ريال',
+    'a-apply1':'تقدّم الآن','a-cmt1':'٤٣ تعليقاً','a-save1':'حفظ','a-badge2':'توظيف','a-conn2':'تواصل',
+    'a-post2':'عاجل! نبحث عن: مدير تسويق رقمي، كاتب محتوى ومندوب مبيعات. راسلنا للتقديم!',
+    'a-bn1a':'الرئيسية','a-bn1b':'الوظائف','a-bn1c':'الرسائل','a-bn1d':'حسابي',
+    'a-jstitle':'تصفح الوظائف','a-jsrch':'المسمى الوظيفي...','a-ftech':'تقنية','a-fhr':'موارد بشرية','a-ffin':'مالية','a-fmkt':'تسويق',
+    'a-j1':'مهندس برمجيات أول','a-j2':'عالم بيانات','a-j3':'مصمم UX',
+    'a-jd1':'التفاصيل','a-jd2':'التفاصيل','a-jd3':'التفاصيل','a-ja1':'تقدّم','a-ja2':'تقدّم','a-ja3':'تقدّم',
+    'a-bn2a':'الرئيسية','a-bn2b':'الوظائف','a-bn2c':'الرسائل','a-bn2d':'حسابي',
+    'a-ptitle':'ملفي الشخصي','a-pname':'أحمد مالك','a-prole':'مهندس برمجيات أول','a-ploc':'الرياض، المملكة العربية السعودية',
+    'a-edit':'تعديل الملف','a-cv':'السيرة','a-pc':'اتصالات','a-pa':'تقديمات','a-po':'عروض',
+    'a-sk':'المهارات','a-exp':'الخبرات','a-e1':'مطور أول — مجموعة STC','a-e2':'مطور متكامل — موضوع',
+    'a-bn3a':'الرئيسية','a-bn3b':'الوظائف','a-bn3c':'الرسائل','a-bn3d':'حسابي',
+    'a-dbtitle':'لوحة التحكم','a-dbco':'أرامكو السعودية','a-dbsub':'مدير الشركة','a-newjob':'+ نشر وظيفة',
+    'a-ds1':'الطلبات','a-ds2':'وظائف نشطة','a-ds3':'مشاهدات','a-ds4':'تم توظيفهم',
+    'a-recentapp':'الطلبات الأخيرة','a-acc1':'قبول','a-dec1':'رفض','a-acc2':'قبول','a-dec2':'رفض','a-acc3':'قبول','a-dec3':'رفض',
+    'a-activejobs':'الوظائف النشطة','a-aj1':'مهندس برمجيات أول','a-aj2':'عالم بيانات','a-aj3':'مهندس DevOps',
+    'a-ast1':'نشط','a-ast2':'نشط','a-ast3':'يُغلق قريباً',
+    'a-bn4a':'الرئيسية','a-bn4b':'الوظائف','a-bn4c':'لوحة التحكم','a-bn4d':'حسابي'}
+};
+
+function setLang(l,el){
+  L=l;
+  document.querySelectorAll('.ls').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  var t=TX[l],rtl=l==='ar';
+  ['sc1','sc2','sc3','sc4','sc5'].forEach(id=>{var e=document.getElementById(id);if(e)e.style.direction=rtl?'rtl':'ltr'});
+  Object.keys(t).forEach(k=>{
+    if(k.startsWith('lbl')){document.getElementById(k).textContent=t[k];return}
+    var el=document.getElementById(k);if(!el)return;
+    if(el.tagName==='INPUT')el.placeholder=t[k];else el.textContent=t[k];
+  });
+}
+function showT(m){var el=document.getElementById('toast');el.textContent=L==='ar'?'تم بنجاح!':m;el.style.opacity='1';el.style.transform='translateX(-50%) translateY(0)';clearTimeout(el._t);el._t=setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(-50%) translateY(60px)'},2200)}
+function doLike(el){var s=el.querySelector('.lc');if(el.dataset.l){el.style.color='';s.textContent=parseInt(s.textContent)-1;delete el.dataset.l}else{el.style.color='#ef4444';s.textContent=parseInt(s.textContent)+1;el.dataset.l=1;showT('Liked!')}}
+function selRole(r){var sk=document.getElementById('a-seek'),co=document.getElementById('a-comp');[sk,co].forEach(e=>e.classList.remove('on'));document.getElementById('a-'+r).classList.add('on');showT(r==='seek'?'Job Seeker selected':'Company selected')}
+</script>
+</body>
+</html>
