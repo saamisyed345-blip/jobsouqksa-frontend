@@ -302,7 +302,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:var(--text
       </div>
     </div>
 
-    <div class="feed">
+    <div class="feed" id="main-feed">
       <div class="card pad">
         <div class="crow">
           <div class="cava">AM</div>
@@ -515,7 +515,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:var(--text
         <input class="inp" type="email" id="w-email" placeholder="Email address">
         <input class="inp" type="password" id="w-pass" placeholder="Password">
         <p style="font-size:11px;color:var(--p);text-align:right;cursor:pointer;margin-bottom:2px" id="w-forgot">Forgot password?</p>
-        <button class="lbtn" onclick="showToast('Logging in...')" id="w-sibtn">Sign In</button>
+        <button class="lbtn" onclick="handleSignIn(event)" id="w-sibtn">Sign In</button>
         <div class="ldiv" id="w-or">or</div>
         <button class="lsoc" onclick="showToast('Google login...')" id="w-google">Continue with Google</button>
         <button class="lsoc" onclick="showToast('LinkedIn login...')" id="w-linkedin">Continue with LinkedIn</button>
@@ -532,7 +532,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;color:var(--text
         <input class="inp" type="text" id="w-rname" placeholder="Full Name">
         <input class="inp" type="email" id="w-remail" placeholder="Email address">
         <input class="inp" type="password" id="w-rpass" placeholder="Password">
-        <button class="lbtn" onclick="showToast('Account created! Welcome to JobSouqKSA!')" id="w-regbtn">Create Account</button>
+        <button class="lbtn" onclick="handleRegister(event)" id="w-regbtn">Create Account</button>
       </div>
       <div class="llink" id="w-noac">Don't have an account? <a onclick="document.querySelectorAll('.rtab')[1].click()">Register here</a></div>
     </div>
@@ -650,6 +650,7 @@ function fw(b){if(b.classList.contains('fw')){b.classList.remove('fw');b.textCon
 function ft(e){document.querySelectorAll('.ft').forEach(t=>t.classList.remove('on'));e.classList.add('on');showToast(e.textContent+' filter applied!')}
 function rtab(e,t){document.querySelectorAll('.rtab').forEach(x=>x.classList.remove('on'));e.classList.add('on');document.getElementById('si-form').style.display=t==='si'?'block':'none';document.getElementById('reg-form').style.display=t==='reg'?'block':'none';document.getElementById('w-noac').style.display=t==='si'?'block':'none'}
 function selRole(el){document.querySelectorAll('.role-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on');showToast(el.id==='w-rseek'?(LANG==='ar'?'باحث عن عمل محدد':'Job Seeker selected'):(LANG==='ar'?'شركة محددة':'Company selected'))}
+
 // ════════════════════════════════════════════════
 //  JobSouqKSA — Frontend API Service Layer
 //  Connects HTML frontend to Node.js backend
@@ -892,10 +893,10 @@ let socket = null;
 const SocketService = {
   connect: () => {
     if (typeof io === 'undefined') {
-      console.warn('Socket.IO client not loaded. Add <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>');
+      console.warn('Socket.IO client not loaded.');
       return null;
     }
-    socket = io('http://localhost:5000');
+    socket = io('https://jobsouqksa-backend-production.up.railway.app');
     const user = getUser();
     if (user) socket.emit('user_online', user._id);
     return socket;
@@ -1535,6 +1536,7 @@ window.loadDashboard        = loadDashboard;
 window.loadJobApplications  = loadJobApplications;
 window.toggleJobStatus      = toggleJobStatus;
 window.loadProfile          = loadProfile;
+
 </script>
 </body>
 </html>
