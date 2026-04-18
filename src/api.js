@@ -240,7 +240,7 @@ let socket = null;
 const SocketService = {
   connect: () => {
     if (typeof io === 'undefined') {
-      console.warn('Socket.IO client not loaded. Add <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>');
+      console.warn('Socket.IO client not loaded.');
       return null;
     }
     socket = io('http://localhost:5000');
